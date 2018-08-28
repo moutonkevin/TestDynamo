@@ -1,6 +1,6 @@
-﻿using Homedish.Dynamo.Models;
+﻿using Homedish.Aws.Dynamo.Models;
 
-namespace Homedish.Dynamo.Validation
+namespace Homedish.Aws.Dynamo.Validation
 {
     internal interface IOperationValidation<T> where T : OperationModel
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Homedish.Dynamo.Models.Get
+namespace Homedish.Aws.Dynamo.Models.Get
 {
     public class GetResponseModel : ResponseBase
     {

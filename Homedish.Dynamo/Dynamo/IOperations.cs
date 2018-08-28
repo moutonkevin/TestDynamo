@@ -1,11 +1,10 @@
 ﻿using System.Threading.Tasks;
-using Homedish.Dynamo.Models;
-using Homedish.Dynamo.Models.Delete;
-using Homedish.Dynamo.Models.Get;
-using Homedish.Dynamo.Models.Insert;
-using Homedish.Dynamo.Models.Query;
+using Homedish.Aws.Dynamo.Models.Delete;
+using Homedish.Aws.Dynamo.Models.Get;
+using Homedish.Aws.Dynamo.Models.Insert;
+using Homedish.Aws.Dynamo.Models.Query;
 
-namespace Homedish.Dynamo
+namespace Homedish.Aws.Dynamo
 {
     public interface IOperations
     {

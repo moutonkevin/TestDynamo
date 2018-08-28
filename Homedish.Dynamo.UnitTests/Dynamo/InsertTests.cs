@@ -1,13 +1,12 @@
 using System.Collections.Generic;
-using System.Configuration;
-using System.IO;
 using System.Net;
 using System.Threading.Tasks;
-using Homedish.Dynamo.Models;
-using Homedish.Dynamo.Models.Insert;
+using Homedish.Aws.Dynamo;
+using Homedish.Aws.Dynamo.Models;
+using Homedish.Aws.Dynamo.Models.Insert;
 using Xunit;
 
-namespace Homedish.Dynamo.UnitTests
+namespace Homedish.Aws.UnitTests.Dynamo
 {
     public class InsertTests
     {

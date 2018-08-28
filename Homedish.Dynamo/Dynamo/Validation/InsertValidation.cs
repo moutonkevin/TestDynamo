@@ -1,7 +1,7 @@
-﻿using Homedish.Dynamo.Models;
-using Homedish.Dynamo.Models.Insert;
+﻿using Homedish.Aws.Dynamo.Models;
+using Homedish.Aws.Dynamo.Models.Insert;
 
-namespace Homedish.Dynamo.Validation
+namespace Homedish.Aws.Dynamo.Validation
 {
     internal class InsertValidation : IOperationValidation<InsertModel>
     {

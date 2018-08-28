@@ -4,80 +4,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
-using Homedish.Dynamo.Models;
-using Homedish.Dynamo.Models.Delete;
-using Homedish.Dynamo.Models.Get;
-using Homedish.Dynamo.Models.Insert;
-using Homedish.Dynamo.Models.Query;
-using Homedish.Dynamo.Validation;
+using Homedish.Aws.Dynamo.Models;
+using Homedish.Aws.Dynamo.Models.Delete;
+using Homedish.Aws.Dynamo.Models.Get;
+using Homedish.Aws.Dynamo.Models.Insert;
+using Homedish.Aws.Dynamo.Models.Query;
+using Homedish.Aws.Dynamo.Validation;
 
-namespace Homedish.Dynamo
+namespace Homedish.Aws.Dynamo
 {
     public class Operations : IOperations
     {
-        private readonly IOperationValidation<InsertModel> _insertValidation = new InsertValidation();
-        private readonly IOperationValidation<GetModel> _getValidation = new GetValidation();
-        private readonly IOperationValidation<QueryModel> _queryValidation = new QueryValidation();
+    
         private readonly IOperationValidation<DeleteModel> _deleteValidation = new DeleteValidation();
-
-
-        private AttributeValue CreateAttributeValue(ColumnType columnType, string columnValue)
-        {
-            switch (columnType)
-            {
-                case ColumnType.Number:
-                    return new AttributeValue {N = columnValue};
-
-                case ColumnType.String:
-                    return new AttributeValue { S = columnValue };
-
-                case ColumnType.Boolean:
-                    return new AttributeValue { BOOL = bool.Parse(columnValue) };
-
-                default:
-                    return null;
-            }
-        }
-
-        private string GetAttributeValue(AttributeValue attributeValue, ColumnType columnType)
-        {
-            switch (columnType)
-            {
-                case ColumnType.Number:
-                    return attributeValue.N;
-
-                case ColumnType.String:
-                    return attributeValue.S;
-
-                case ColumnType.Boolean:
-                    return attributeValue.BOOL.ToString();
-
-                default:
-                    return null;
-            }
-        }
-
-        private Dictionary<string, AttributeValue> ConvertToDynamoKey(DynamoField partitionKey, DynamoField sortKey)
-        {
-            var dynamoKeys = new Dictionary<string, AttributeValue>();
-
-            if (partitionKey != null)
-            {
-                dynamoKeys.Add(partitionKey.ColumnName, CreateAttributeValue(partitionKey.ColumnType, partitionKey.ColumnValue));
-            }
-            if (sortKey != null)
-            {
-                dynamoKeys.Add(sortKey.ColumnName, CreateAttributeValue(sortKey.ColumnType, sortKey.ColumnValue));
-            }
-
-            return dynamoKeys;
-        }
+        private readonly IOperationValidation<GetModel> _getValidation = new GetValidation();
+        private readonly IOperationValidation<InsertModel> _insertValidation = new InsertValidation();
+        private readonly IOperationValidation<QueryModel> _queryValidation = new QueryValidation();
 
         public async Task<InsertResponseModel> InsertAsync(InsertModel value)
         {
             var validationResult = _insertValidation.Validate(value);
             if (!validationResult.IsSuccess)
-                return await Task.FromResult((InsertResponseModel)validationResult);
+                return await Task.FromResult((InsertResponseModel) validationResult);
 
             try
             {
@@ -87,10 +35,10 @@ namespace Homedish.Dynamo
                 var putItemResponse = await Client.PutItemAsync(new PutItemRequest
                 {
                     TableName = value.TableName,
-                    Item = dynamoObject,
+                    Item = dynamoObject
                 });
 
-                return new InsertResponseModel()
+                return new InsertResponseModel
                 {
                     HttpStatusCode = putItemResponse.HttpStatusCode
                 };
@@ -117,7 +65,7 @@ namespace Homedish.Dynamo
         {
             var validationResult = _getValidation.Validate(value);
             if (!validationResult.IsSuccess)
-                return await Task.FromResult((GetResponseModel)validationResult);
+                return await Task.FromResult((GetResponseModel) validationResult);
 
             try
             {
@@ -126,7 +74,7 @@ namespace Homedish.Dynamo
                 var getItemResponse = await Client.GetItemAsync(new GetItemRequest
                 {
                     TableName = value.TableName,
-                    Key = dynamoObject,
+                    Key = dynamoObject
                 });
 
                 var items = new List<DynamoField>();
@@ -135,13 +83,14 @@ namespace Homedish.Dynamo
                 {
                     var dynamoField = getItemResponse.Item[field.ColumnName];
 
-                    items.Add(new DynamoField( field.ColumnName, field.ColumnType, GetAttributeValue(dynamoField, field.ColumnType)));
+                    items.Add(new DynamoField(field.ColumnName, field.ColumnType,
+                        GetAttributeValue(dynamoField, field.ColumnType)));
                 }
 
                 return new GetResponseModel
                 {
                     HttpStatusCode = getItemResponse.HttpStatusCode,
-                    Items = new List<List<DynamoField>> { items }
+                    Items = new List<List<DynamoField>> {items}
                 };
             }
             catch (AmazonDynamoDBException exception)
@@ -166,16 +115,14 @@ namespace Homedish.Dynamo
         {
             var validationResult = _queryValidation.Validate(value);
             if (!validationResult.IsSuccess)
-                return await Task.FromResult((QueryResponseModel)validationResult);
+                return await Task.FromResult((QueryResponseModel) validationResult);
 
             try
             {
                 var values = new Dictionary<string, AttributeValue>();
 
                 foreach (var cev in value.ConditionExpressionValues)
-                {
                     values.Add(cev.ColumnName, CreateAttributeValue(cev.ColumnType, cev.ColumnValue));
-                }
 
                 var queryResponse = await Client.QueryAsync(new QueryRequest
                 {
@@ -193,15 +140,11 @@ namespace Homedish.Dynamo
                     var columns = new List<DynamoField>();
 
                     foreach (var fieldsToRetrieve in value.FieldsToRetrieve)
-                    {
-                        foreach (var column in row)
-                        {
-                            if (string.Compare(fieldsToRetrieve.ColumnName, column.Key, StringComparison.InvariantCulture) == 0)
-                            {
-                                columns.Add(new DynamoField(column.Key, fieldsToRetrieve.ColumnType, GetAttributeValue(column.Value, fieldsToRetrieve.ColumnType)));
-                            }
-                        }
-                    }
+                    foreach (var column in row)
+                        if (string.Compare(fieldsToRetrieve.ColumnName, column.Key,
+                                StringComparison.InvariantCulture) == 0)
+                            columns.Add(new DynamoField(column.Key, fieldsToRetrieve.ColumnType,
+                                GetAttributeValue(column.Value, fieldsToRetrieve.ColumnType)));
                     items.Add(columns);
                 }
 
@@ -233,7 +176,7 @@ namespace Homedish.Dynamo
         {
             var validationResult = _deleteValidation.Validate(value);
             if (!validationResult.IsSuccess)
-                return await Task.FromResult((DeleteResponseModel)validationResult);
+                return await Task.FromResult((DeleteResponseModel) validationResult);
 
             try
             {
@@ -243,12 +186,12 @@ namespace Homedish.Dynamo
                 var deleteItemResponse = await Client.DeleteItemAsync(new DeleteItemRequest
                 {
                     TableName = value.TableName,
-                    Key = dynamoObject,
+                    Key = dynamoObject
                 });
 
                 return new DeleteResponseModel
                 {
-                    HttpStatusCode = deleteItemResponse.HttpStatusCode,
+                    HttpStatusCode = deleteItemResponse.HttpStatusCode
                 };
             }
             catch (AmazonDynamoDBException exception)
@@ -267,6 +210,55 @@ namespace Homedish.Dynamo
                     ErrorMessage = exception.ToString()
                 };
             }
+        }
+
+        private AttributeValue CreateAttributeValue(ColumnType columnType, string columnValue)
+        {
+            switch (columnType)
+            {
+                case ColumnType.Number:
+                    return new AttributeValue {N = columnValue};
+
+                case ColumnType.String:
+                    return new AttributeValue {S = columnValue};
+
+                case ColumnType.Boolean:
+                    return new AttributeValue {BOOL = bool.Parse(columnValue)};
+
+                default:
+                    return null;
+            }
+        }
+
+        private string GetAttributeValue(AttributeValue attributeValue, ColumnType columnType)
+        {
+            switch (columnType)
+            {
+                case ColumnType.Number:
+                    return attributeValue.N;
+
+                case ColumnType.String:
+                    return attributeValue.S;
+
+                case ColumnType.Boolean:
+                    return attributeValue.BOOL.ToString();
+
+                default:
+                    return null;
+            }
+        }
+
+        private Dictionary<string, AttributeValue> ConvertToDynamoKey(DynamoField partitionKey, DynamoField sortKey)
+        {
+            var dynamoKeys = new Dictionary<string, AttributeValue>();
+
+            if (partitionKey != null)
+                dynamoKeys.Add(partitionKey.ColumnName,
+                    CreateAttributeValue(partitionKey.ColumnType, partitionKey.ColumnValue));
+            if (sortKey != null)
+                dynamoKeys.Add(sortKey.ColumnName, CreateAttributeValue(sortKey.ColumnType, sortKey.ColumnValue));
+
+            return dynamoKeys;
         }
     }
 }

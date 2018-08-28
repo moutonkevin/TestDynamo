@@ -1,7 +1,7 @@
-﻿using Homedish.Dynamo.Models;
-using Homedish.Dynamo.Models.Query;
+﻿using Homedish.Aws.Dynamo.Models;
+using Homedish.Aws.Dynamo.Models.Query;
 
-namespace Homedish.Dynamo.Validation
+namespace Homedish.Aws.Dynamo.Validation
 {
     internal class QueryValidation : IOperationValidation<QueryModel>
     {

@@ -1,7 +1,7 @@
-﻿using Homedish.Dynamo.Models;
-using Homedish.Dynamo.Models.Get;
+﻿using Homedish.Aws.Dynamo.Models;
+using Homedish.Aws.Dynamo.Models.Get;
 
-namespace Homedish.Dynamo.Validation
+namespace Homedish.Aws.Dynamo.Validation
 {
     internal class GetValidation : IOperationValidation<GetModel>
     {

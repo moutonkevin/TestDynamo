@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace Homedish.Dynamo.Models
+namespace Homedish.Aws.Dynamo.Models
 {
     public class ResponseBase
     {

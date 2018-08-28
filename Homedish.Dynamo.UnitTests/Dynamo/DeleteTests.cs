@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Homedish.Dynamo.Models;
-using Homedish.Dynamo.Models.Delete;
+using Homedish.Aws.Dynamo;
+using Homedish.Aws.Dynamo.Models;
+using Homedish.Aws.Dynamo.Models.Delete;
 using Xunit;
 
-namespace Homedish.Dynamo.UnitTests
+namespace Homedish.Aws.UnitTests.Dynamo
 {
     public class DeleteTests
     {

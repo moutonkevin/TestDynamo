@@ -1,7 +1,7 @@
-﻿using Homedish.Dynamo.Models;
-using Homedish.Dynamo.Models.Delete;
+﻿using Homedish.Aws.Dynamo.Models;
+using Homedish.Aws.Dynamo.Models.Delete;
 
-namespace Homedish.Dynamo.Validation
+namespace Homedish.Aws.Dynamo.Validation
 {
     internal class DeleteValidation : IOperationValidation<DeleteModel>
     {

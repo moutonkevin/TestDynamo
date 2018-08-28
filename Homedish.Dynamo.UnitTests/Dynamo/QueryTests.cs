@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using Homedish.Dynamo.Models;
-using Homedish.Dynamo.Models.Query;
+using Homedish.Aws.Dynamo;
+using Homedish.Aws.Dynamo.Models;
+using Homedish.Aws.Dynamo.Models.Query;
 using Xunit;
 
-namespace Homedish.Dynamo.UnitTests
+namespace Homedish.Aws.UnitTests.Dynamo
 {
     public class QueryTests
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Homedish.Dynamo.Models.Insert
+namespace Homedish.Aws.Dynamo.Models.Insert
 {
     public class InsertModel : OperationModel
     {

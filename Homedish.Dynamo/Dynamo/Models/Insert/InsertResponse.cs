@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-namespace Homedish.Dynamo.Models
+﻿namespace Homedish.Aws.Dynamo.Models.Insert
 {
     public class InsertResponseModel : ResponseBase
     {
