@@ -1,0 +1,91 @@
+using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
+using System.Net;
+using System.Threading.Tasks;
+using Homedish.Dynamo.Models;
+using Homedish.Dynamo.Models.Insert;
+using Xunit;
+
+namespace Homedish.Dynamo.UnitTests
+{
+    public class InsertTests
+    {
+
+        private readonly IOperations _operations = new Operations();
+        private readonly string _tableName = "kevin-test2";
+
+        [Fact]
+        public async Task InsertBoolValidOperation_Success()
+        {
+            var model = new InsertModel
+            {
+                TableName = _tableName,
+                Fields = new List<DynamoField>
+                {
+                    new DynamoField {ColumnName = "id", ColumnType = ColumnType.Number, ColumnValue = "1"},
+                    new DynamoField {ColumnName = "bool", ColumnType = ColumnType.Boolean, ColumnValue = "True"}
+                }
+            };
+
+            var response = await _operations.InsertAsync(model);
+
+            Assert.True(response.IsSuccess);
+        }
+
+        [Fact]
+        public async Task InsertValidOperation_Success()
+        {
+            var model = new InsertModel
+            {
+                TableName = _tableName,
+                Fields = new List<DynamoField>
+                {
+                    new DynamoField {ColumnName = "id", ColumnType = ColumnType.Number, ColumnValue = "1"},
+                    new DynamoField {ColumnName = "test", ColumnType = ColumnType.String, ColumnValue = "hello2"}
+                }
+            };
+
+            var response = await _operations.InsertAsync(model);
+
+            Assert.True(response.IsSuccess);
+        }
+
+        [Fact]
+        public async Task InsertNoPrimaryKey_Failure()
+        {
+            var model = new InsertModel
+            {
+                TableName = _tableName,
+                Fields = new List<DynamoField>
+                {
+                    new DynamoField {ColumnName = "test", ColumnType = ColumnType.String, ColumnValue = "hello2"}
+                }
+            };
+
+            var response = await _operations.InsertAsync(model);
+
+            Assert.False(response.IsSuccess);
+            Assert.Equal(HttpStatusCode.BadRequest, response.HttpStatusCode);
+            Assert.Equal("ValidationException", response.ErrorCode);
+        }
+
+        [Fact]
+        public async Task InsertNoTableName_Failure()
+        {
+            var model = new InsertModel
+            {
+                Fields = new List<DynamoField>
+                {
+                    new DynamoField {ColumnName = "id", ColumnType = ColumnType.Number, ColumnValue = "1"},
+                    new DynamoField {ColumnName = "test", ColumnType = ColumnType.String, ColumnValue = "hello2"}
+                }
+            };
+
+            var response = await _operations.InsertAsync(model);
+
+            Assert.False(response.IsSuccess);
+            Assert.Equal("Table name cannot be empty", response.ErrorMessage);
+        }
+    }
+}

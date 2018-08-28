@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homedish.Dynamo", "Homedish.Dynamo\Homedish.Dynamo.csproj", "{BEA3D672-24EF-4D73-840C-C00CDDBABF47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homedish.Dynamo.UnitTests", "Homedish.Dynamo.UnitTests\Homedish.Dynamo.UnitTests.csproj", "{207EC25F-CEC1-4FDB-88F5-08190673C135}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BEA3D672-24EF-4D73-840C-C00CDDBABF47} = {BEA3D672-24EF-4D73-840C-C00CDDBABF47}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BEA3D672-24EF-4D73-840C-C00CDDBABF47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEA3D672-24EF-4D73-840C-C00CDDBABF47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEA3D672-24EF-4D73-840C-C00CDDBABF47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEA3D672-24EF-4D73-840C-C00CDDBABF47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{207EC25F-CEC1-4FDB-88F5-08190673C135}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{207EC25F-CEC1-4FDB-88F5-08190673C135}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{207EC25F-CEC1-4FDB-88F5-08190673C135}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{207EC25F-CEC1-4FDB-88F5-08190673C135}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1B9646B8-416C-442A-A1D8-EDD2F02A030E}
+	EndGlobalSection
+EndGlobal
