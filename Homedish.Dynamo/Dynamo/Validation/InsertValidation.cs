@@ -1,5 +1,5 @@
-﻿using Homedish.Aws.Dynamo.Models;
-using Homedish.Aws.Dynamo.Models.Insert;
+﻿using Homedish.Aws.Dynamo.Model;
+using Homedish.Aws.Dynamo.Model.Insert;
 
 namespace Homedish.Aws.Dynamo.Validation
 {

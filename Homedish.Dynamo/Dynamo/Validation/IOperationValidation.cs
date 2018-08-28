@@ -1,4 +1,4 @@
-﻿using Homedish.Aws.Dynamo.Models;
+﻿using Homedish.Aws.Dynamo.Model;
 
 namespace Homedish.Aws.Dynamo.Validation
 {

@@ -1,10 +1,7 @@
-﻿namespace Homedish.Aws.Dynamo.Models
+﻿namespace Homedish.Aws.Dynamo.Model
 {
     public class DynamoFieldSchema
     {
-        public string ColumnName { get; set; }
-        public ColumnType ColumnType { get; set; }
-
         public DynamoFieldSchema()
         {
         }
@@ -14,5 +11,8 @@
             ColumnName = columnName;
             ColumnType = columnType;
         }
+
+        public string ColumnName { get; set; }
+        public ColumnType ColumnType { get; set; }
     }
 }

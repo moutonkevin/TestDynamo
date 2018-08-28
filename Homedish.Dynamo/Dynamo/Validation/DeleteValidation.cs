@@ -1,5 +1,5 @@
-﻿using Homedish.Aws.Dynamo.Models;
-using Homedish.Aws.Dynamo.Models.Delete;
+﻿using Homedish.Aws.Dynamo.Model;
+using Homedish.Aws.Dynamo.Model.Delete;
 
 namespace Homedish.Aws.Dynamo.Validation
 {

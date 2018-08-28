@@ -1,5 +1,5 @@
-﻿using Homedish.Aws.Dynamo.Models;
-using Homedish.Aws.Dynamo.Models.Query;
+﻿using Homedish.Aws.Dynamo.Model;
+using Homedish.Aws.Dynamo.Model.Query;
 
 namespace Homedish.Aws.Dynamo.Validation
 {

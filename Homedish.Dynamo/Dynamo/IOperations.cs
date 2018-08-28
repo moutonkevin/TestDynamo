@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Homedish.Aws.Dynamo.Models.Delete;
-using Homedish.Aws.Dynamo.Models.Get;
-using Homedish.Aws.Dynamo.Models.Insert;
-using Homedish.Aws.Dynamo.Models.Query;
+using Homedish.Aws.Dynamo.Model.Delete;
+using Homedish.Aws.Dynamo.Model.Get;
+using Homedish.Aws.Dynamo.Model.Insert;
+using Homedish.Aws.Dynamo.Model.Query;
 
 namespace Homedish.Aws.Dynamo
 {

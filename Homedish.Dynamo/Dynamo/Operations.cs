@@ -4,18 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
-using Homedish.Aws.Dynamo.Models;
-using Homedish.Aws.Dynamo.Models.Delete;
-using Homedish.Aws.Dynamo.Models.Get;
-using Homedish.Aws.Dynamo.Models.Insert;
-using Homedish.Aws.Dynamo.Models.Query;
+using Homedish.Aws.Dynamo.Model;
+using Homedish.Aws.Dynamo.Model.Delete;
+using Homedish.Aws.Dynamo.Model.Get;
+using Homedish.Aws.Dynamo.Model.Insert;
+using Homedish.Aws.Dynamo.Model.Query;
 using Homedish.Aws.Dynamo.Validation;
 
 namespace Homedish.Aws.Dynamo
 {
     public class Operations : IOperations
     {
-    
+        private static readonly IAmazonDynamoDB Client = new AmazonDynamoDBClient();
+
         private readonly IOperationValidation<DeleteModel> _deleteValidation = new DeleteValidation();
         private readonly IOperationValidation<GetModel> _getValidation = new GetValidation();
         private readonly IOperationValidation<InsertModel> _insertValidation = new InsertValidation();

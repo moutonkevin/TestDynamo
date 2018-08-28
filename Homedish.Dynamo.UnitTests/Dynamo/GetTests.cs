@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Homedish.Aws.Dynamo;
-using Homedish.Aws.Dynamo.Models;
-using Homedish.Aws.Dynamo.Models.Get;
+using Homedish.Aws.Dynamo.Model;
+using Homedish.Aws.Dynamo.Model.Get;
 using Xunit;
 
 namespace Homedish.Dynamo.UnitTests

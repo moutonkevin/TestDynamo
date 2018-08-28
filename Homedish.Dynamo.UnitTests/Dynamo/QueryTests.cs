@@ -2,8 +2,8 @@
 using System.Net;
 using System.Threading.Tasks;
 using Homedish.Aws.Dynamo;
-using Homedish.Aws.Dynamo.Models;
-using Homedish.Aws.Dynamo.Models.Query;
+using Homedish.Aws.Dynamo.Model;
+using Homedish.Aws.Dynamo.Model.Query;
 using Xunit;
 
 namespace Homedish.Aws.UnitTests.Dynamo

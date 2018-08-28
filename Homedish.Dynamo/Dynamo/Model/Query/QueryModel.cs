@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Homedish.Aws.Dynamo.Models.Query
+namespace Homedish.Aws.Dynamo.Model.Query
 {
     public class QueryModel : OperationModel
     {

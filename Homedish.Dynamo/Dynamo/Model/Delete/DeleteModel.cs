@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Homedish.Aws.Dynamo.Models.Delete
+namespace Homedish.Aws.Dynamo.Model.Delete
 {
     public class DeleteModel : OperationModel
     {
