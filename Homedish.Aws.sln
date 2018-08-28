@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homedish.Aws", "Homedish.Dynamo\Homedish.Aws.csproj", "{BEA3D672-24EF-4D73-840C-C00CDDBABF47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homedish.Aws.Dynamo", "Homedish.Dynamo\Homedish.Aws.Dynamo.csproj", "{BEA3D672-24EF-4D73-840C-C00CDDBABF47}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homedish.Aws.UnitTests", "Homedish.Dynamo.UnitTests\Homedish.Aws.UnitTests.csproj", "{207EC25F-CEC1-4FDB-88F5-08190673C135}"
 	ProjectSection(ProjectDependencies) = postProject

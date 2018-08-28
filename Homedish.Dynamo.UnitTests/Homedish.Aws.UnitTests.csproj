@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Homedish.Dynamo\Homedish.Aws.csproj" />
+    <ProjectReference Include="..\Homedish.Dynamo\Homedish.Aws.Dynamo.csproj" />
   </ItemGroup>
 
 </Project>
