@@ -5,7 +5,7 @@ using Homedish.Aws.Dynamo.Model;
 using Homedish.Aws.Dynamo.Model.Query;
 using Xunit;
 
-namespace Homedish.Aws.Dynamo.UnitTests.Dynamo
+namespace Homedish.Aws.Dynamo.UnitTests
 {
     public class QueryTests
     {

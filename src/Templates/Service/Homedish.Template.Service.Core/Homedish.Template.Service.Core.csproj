@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\DLLs\Homedish.Logging\Homedish.Logging.csproj" />
+    <ProjectReference Include="..\..\..\DLLs\Homedish.Models\Homedish.Models.csproj" />
+  </ItemGroup>
+
+</Project>
