@@ -1,14 +1,12 @@
 ﻿namespace Homedish.Logging
 {
-    public class Logger
+    public class Logger : ILogger
     {
-        public readonly string CallingClassFullName;
         private readonly NLog.Logger _logger;
 
-        public Logger(string callingClassFullName)
+        public Logger()
         {
-            CallingClassFullName = callingClassFullName;
-            _logger = NLog.LogManager.GetLogger(CallingClassFullName);
+            _logger = NLog.LogManager.GetCurrentClassLogger();
         }
 
         public void Info(string message)

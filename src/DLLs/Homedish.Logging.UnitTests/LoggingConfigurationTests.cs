@@ -8,7 +8,7 @@ namespace Homedish.Logging.UnitTests
         [Fact]
         public void ConfigureWithFileTarget_Exists()
         {
-            LoggingConfiguration.ConfigureWithFileTarget();
+            new LoggingConfiguration().ConfigureWithFileTarget();
 
             Assert.NotNull(NLog.LogManager.Configuration);
         }
@@ -16,7 +16,7 @@ namespace Homedish.Logging.UnitTests
         [Fact]
         public void ConfigureWithFileTarget_OneRuleIsAdded()
         {
-            LoggingConfiguration.ConfigureWithFileTarget();
+            new LoggingConfiguration().ConfigureWithFileTarget();
 
             Assert.Equal(1, NLog.LogManager.Configuration.LoggingRules.Count);
         }
@@ -24,7 +24,7 @@ namespace Homedish.Logging.UnitTests
         [Fact]
         public void ConfigureWithFileTarget_CorrectFileTarget()
         {
-            LoggingConfiguration.ConfigureWithFileTarget();
+            new LoggingConfiguration().ConfigureWithFileTarget();
 
             Assert.Equal(1, NLog.LogManager.Configuration.LoggingRules[0].Targets.Count);
             Assert.IsType<FileTarget>(NLog.LogManager.Configuration.LoggingRules[0].Targets[0]);

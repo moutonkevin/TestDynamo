@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Homedish.Aws.S3\Homedish.Logging.csproj" />
+    <ProjectReference Include="..\Homedish.Logging\Homedish.Logging.csproj" />
   </ItemGroup>
 
 </Project>

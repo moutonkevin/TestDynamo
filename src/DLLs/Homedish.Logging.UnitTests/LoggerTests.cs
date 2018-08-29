@@ -14,8 +14,8 @@ namespace Homedish.Logging.UnitTests
         {
             string message = $"test-{DateTime.Now}";
 
-            LoggingConfiguration.ConfigureWithFileTarget(logFilePath);
-            var logger = LogManager.GetCurrentClassLogger();
+            new LoggingConfiguration().ConfigureWithFileTarget(logFilePath);
+            var logger = LogManager.GetLogger();
 
             logger.Info(message);
 
