@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homedish.Logging", "Homedis
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homedish.Logging.UnitTests", "Homedish.Logging.UnitTests\Homedish.Logging.UnitTests.csproj", "{6A132414-A266-4241-9FFD-EE8C2064B551}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homedish.Models", "Homedish.Models\Homedish.Models.csproj", "{99D3B210-8627-4FF5-AD8C-D21D535FD5FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{6A132414-A266-4241-9FFD-EE8C2064B551}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A132414-A266-4241-9FFD-EE8C2064B551}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A132414-A266-4241-9FFD-EE8C2064B551}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99D3B210-8627-4FF5-AD8C-D21D535FD5FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99D3B210-8627-4FF5-AD8C-D21D535FD5FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99D3B210-8627-4FF5-AD8C-D21D535FD5FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99D3B210-8627-4FF5-AD8C-D21D535FD5FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
