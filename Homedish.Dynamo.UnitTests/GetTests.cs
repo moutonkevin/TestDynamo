@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Homedish.Aws.Dynamo;
 using Homedish.Aws.Dynamo.Model;
 using Homedish.Aws.Dynamo.Model.Get;
 using Xunit;
 
-namespace Homedish.Dynamo.UnitTests
+namespace Homedish.Aws.Dynamo.UnitTests
 {
     public class GetTests
     {
