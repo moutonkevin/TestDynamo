@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\DLLs\Homedish.Logging\Homedish.Logging.csproj" />
+    <ProjectReference Include="..\..\..\DLLs\Homedish.Models\Homedish.Models.csproj" />
+    <ProjectReference Include="..\Homedish.Template.Core\Homedish.Template.Core.csproj" />
+  </ItemGroup>
+
+</Project>
