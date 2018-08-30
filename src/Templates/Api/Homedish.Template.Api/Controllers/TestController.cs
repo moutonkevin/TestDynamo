@@ -1,10 +1,13 @@
-﻿using Homedish.Logging;
+﻿using System.Security.Claims;
+using Homedish.Logging;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
 namespace Homedish.Template.Api.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize(Policy = "ApiKey")]
     [ApiController]
     public class TestController : ControllerBase
     {

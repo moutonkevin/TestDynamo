@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using Homedish.Logging;
 using Homedish.Template.Api.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,15 @@ namespace Homedish.Template.Api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddCustomLogging();
+
+            services.AddTransient<AuthorizationHandler<ApiKeyRequirement>, ApiKeyRequirement>();
+
+            var serviceProdider = services.BuildServiceProvider();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ApiKey", policy => policy.Requirements.Add((IAuthorizationRequirement)serviceProdider.GetService<AuthorizationHandler<ApiKeyRequirement>>()));
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
