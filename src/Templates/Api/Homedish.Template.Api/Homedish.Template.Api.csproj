@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\DLLs\Homedish.Logging\Homedish.Logging.csproj" />
     <ProjectReference Include="..\..\..\DLLs\Homedish.Models\Homedish.Models.csproj" />
+    <ProjectReference Include="..\..\..\DLLs\Homedish.WebCore\Homedish.WebCore.csproj" />
     <ProjectReference Include="..\Homedish.Template.Core\Homedish.Template.Core.csproj" />
   </ItemGroup>
 
