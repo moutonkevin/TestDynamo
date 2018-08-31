@@ -29,19 +29,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{45FB3165-AE0A-46D4-93E4-42F8812C35CA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homedish.Template.Service", "Templates\Service\Homedish.Template.Service\Homedish.Template.Service.csproj", "{AE2FFB8E-F78E-4C89-BD27-14B8B0CBA0D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homedish.Template.Worker", "Templates\Service\Homedish.Template.Service\Homedish.Template.Worker.csproj", "{AE2FFB8E-F78E-4C89-BD27-14B8B0CBA0D6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{EC15A95B-98F3-4359-9886-FEAE4235A086}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Worker", "Worker", "{EC15A95B-98F3-4359-9886-FEAE4235A086}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homedish.Template.Service.UnitTests", "Templates\Service\Homedish.Template.Service.UnitTests\Homedish.Template.Service.UnitTests.csproj", "{8FEEFE4D-3B4A-4135-BDE7-ED98D56A8AD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homedish.Template.Worker.UnitTests", "Templates\Service\Homedish.Template.Service.UnitTests\Homedish.Template.Worker.UnitTests.csproj", "{8FEEFE4D-3B4A-4135-BDE7-ED98D56A8AD2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homedish.Template.Service.Core", "Templates\Service\Homedish.Template.Service.Core\Homedish.Template.Service.Core.csproj", "{AF5681D6-9F31-4412-8DD4-77E0A3D907DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homedish.Template.Worker.Core", "Templates\Service\Homedish.Template.Service.Core\Homedish.Template.Worker.Core.csproj", "{AF5681D6-9F31-4412-8DD4-77E0A3D907DF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homedish.WebCore", "DLLs\Homedish.WebCore\Homedish.WebCore.csproj", "{071E35BE-13BB-4090-ADE2-58108219FA14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homedish.SQL", "DLLs\Homedish.SQL\Homedish.SQL.csproj", "{D75A75EE-B6DE-41EF-A7F7-7731D542ED0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homedish.SQL", "DLLs\Homedish.SQL\Homedish.SQL.csproj", "{D75A75EE-B6DE-41EF-A7F7-7731D542ED0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homedish.SQL.UnitTests", "DLLs\Homedish.SQL.UnitTests\Homedish.SQL.UnitTests.csproj", "{B1E26829-85D4-4A1A-B2D3-F00ADECE1603}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homedish.SQL.UnitTests", "DLLs\Homedish.SQL.UnitTests\Homedish.SQL.UnitTests.csproj", "{B1E26829-85D4-4A1A-B2D3-F00ADECE1603}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

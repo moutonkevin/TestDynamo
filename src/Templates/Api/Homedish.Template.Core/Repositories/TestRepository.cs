@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Homedish.Template.Core.Repositories
 {
-    public class TestRepository
+    public class TestRepository : ITestRepository
     {
         private readonly ILogger _logger;
         private readonly IConfiguration _configurations;
@@ -12,6 +12,11 @@ namespace Homedish.Template.Core.Repositories
         {
             _logger = logger;
             _configurations = configurations;
+        }
+
+        public string Get(int id)
+        {
+            return $"hello {id}";
         }
     }
 }

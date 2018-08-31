@@ -1,4 +1,6 @@
 ﻿using Homedish.Logging;
+using Homedish.Template.Core.Repositories;
+using Homedish.Template.Core.Services;
 using Homedish.WebCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,13 +22,14 @@ namespace Homedish.Template.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
             services.AddCustomLogging();
-
             services.AddAuthentication(options =>
             {
                 options.AddScheme<ApiKeyAuthenticationHandler>("ApiKey", "API Key");
             });
+
+            services.AddTransient<ITestService, TestService>();
+            services.AddTransient<ITestRepository, TestRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

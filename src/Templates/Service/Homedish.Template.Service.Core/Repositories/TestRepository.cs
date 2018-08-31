@@ -1,9 +1,9 @@
 ﻿using Homedish.Logging;
 using Microsoft.Extensions.Configuration;
 
-namespace Homedish.Template.Service.Core.Repositories
+namespace Homedish.Template.Worker.Core.Repositories
 {
-    public class TestRepository
+    public class TestRepository : ITestRepository
     {
         private readonly ILogger _logger;
         private readonly IConfiguration _configurations;
@@ -12,6 +12,11 @@ namespace Homedish.Template.Service.Core.Repositories
         {
             _logger = logger;
             _configurations = configurations;
+        }
+
+        public string Get(int id)
+        {
+            return "hello";
         }
     }
 }

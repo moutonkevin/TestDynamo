@@ -1,4 +1,5 @@
 ﻿using Homedish.Logging;
+using Homedish.Template.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -12,11 +13,13 @@ namespace Homedish.Template.Api.Controllers
     {
         private readonly ILogger _logger;
         private readonly IConfiguration _configurations;
+        private readonly ITestService _testService;
 
-        public TestController(ILogger logger, IConfiguration configurations)
+        public TestController(ILogger logger, IConfiguration configurations, ITestService testService)
         {
             _logger = logger;
             _configurations = configurations;
+            _testService = testService;
         }
 
         [HttpGet("{id}")]
@@ -24,7 +27,9 @@ namespace Homedish.Template.Api.Controllers
         {
             _logger.Info($"Placeholder for {_configurations["FeatureName"]} and ID = {id}");
 
-            return string.Empty;
+            var value = _testService.Get(id);
+
+            return value;
         }
     }
 }

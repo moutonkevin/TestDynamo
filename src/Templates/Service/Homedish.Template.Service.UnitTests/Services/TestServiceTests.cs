@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace Homedish.Template.Service.UnitTests.Services
+namespace Homedish.Template.Worker.UnitTests.Services
 {
     public class TestServiceTests
     {
