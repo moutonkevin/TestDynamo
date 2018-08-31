@@ -18,7 +18,6 @@
     <ProjectReference Include="..\..\..\DLLs\Homedish.Logging\Homedish.Logging.csproj" />
     <ProjectReference Include="..\..\..\DLLs\Homedish.Models\Homedish.Models.csproj" />
     <ProjectReference Include="..\..\Api\Homedish.Template.Core\Homedish.Template.Core.csproj" />
-    <ProjectReference Include="..\Homedish.Template.Service\Homedish.Template.Worker.csproj" />
   </ItemGroup>
 
   <ItemGroup>
