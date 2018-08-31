@@ -29,7 +29,7 @@ namespace Homedish.SQL.UnitTests
                 }
             };
 
-            var response = await _operations.ExecuteStoredProcedure(configs, async (results) =>
+            var response = await _operations.ExecuteStoredProcedureAsync(configs, async (results) =>
             {
                 return await results.Read(async () => new SpResponse
                 {
@@ -58,7 +58,7 @@ namespace Homedish.SQL.UnitTests
                 }
             };
 
-            var response = await _operations.ExecuteStoredProcedure(configs, async (results) =>
+            var response = await _operations.ExecuteStoredProcedureAsync(configs, async (results) =>
             {
                 return await results.ReadAll(async () => new SpResponse
                 {
@@ -85,7 +85,7 @@ namespace Homedish.SQL.UnitTests
                 }
             };
 
-            var response = await _operations.ExecuteStoredProcedure(configs, async (results) =>
+            var response = await _operations.ExecuteStoredProcedureAsync(configs, async (results) =>
             {
                 return await results.Read(async () => results.HasRows() ? new SpResponse() : null);
             });
@@ -103,7 +103,7 @@ namespace Homedish.SQL.UnitTests
                 StoredProcedureParameters =  null
             };
 
-            var response = await _operations.ExecuteStoredProcedure(configs, async (results) =>
+            var response = await _operations.ExecuteStoredProcedureAsync(configs, async (results) =>
             {
                 return await results.ReadAll(async () => new SpResponse
                 {

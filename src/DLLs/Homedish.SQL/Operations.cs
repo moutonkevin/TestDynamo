@@ -9,7 +9,7 @@ namespace Homedish.SQL
 {
     public class Operations : IOperations
     {
-        public async Task<T> ExecuteStoredProcedure<T>(StoredProcedureConfiguration configs, Func<SqlReader, Task<T>> readerCallback)
+        public async Task<T> ExecuteStoredProcedureAsync<T>(StoredProcedureConfiguration configs, Func<SqlReader, Task<T>> readerCallback)
         {
             using (var connection = new SqlConnection(configs.ConnectionString))
             using (var command = connection.CreateCommand())
