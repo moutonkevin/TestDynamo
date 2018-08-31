@@ -22,7 +22,6 @@ namespace Homedish.WebCore.Authentication
             IConfiguration configurations,
             ILogger logger) : base(options, loggerFactory, encoder, clock)
         {
-
             _configurations = configurations;
             _logger = logger;
         }
