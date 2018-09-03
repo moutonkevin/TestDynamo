@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Homedish.Events.Contracts
+﻿namespace Homedish.Events.Contracts
 {
     public class TestEvent : Event
     {

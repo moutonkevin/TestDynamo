@@ -14,7 +14,7 @@ namespace Homedish.Ably
 
         public async Task<bool> PublishAsync<TEvent>(TEvent content) where TEvent : Event
         {
-            var channel = _ablyRealtime.Channels.Get(content.ChannelName);
+            var channel = AblyRealtime.Channels.Get(content.ChannelName);
 
             content.Creation = DateTime.UtcNow;
 

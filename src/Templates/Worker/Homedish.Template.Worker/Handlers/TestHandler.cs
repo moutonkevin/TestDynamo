@@ -16,6 +16,8 @@ namespace Homedish.Template.Worker.Handlers
 
         public async Task<bool> HandleAsync(TestEvent message)
         {
+            Logger.Info($"{nameof(TestEvent)} received", message);
+
             Console.WriteLine(message.Content);
 
             return true;

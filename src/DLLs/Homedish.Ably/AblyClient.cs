@@ -5,11 +5,11 @@ namespace Homedish.Ably
 {
     public class AblyClient
     {
-        protected AblyRealtime _ablyRealtime { get; set; }
+        protected AblyRealtime AblyRealtime { get; set; }
 
         public AblyClient(IConfiguration configuration)
         {
-            _ablyRealtime = new AblyRealtime(configuration["AblyApiKey"]);
+            AblyRealtime = new AblyRealtime(configuration["AblyApiKey"]);
         }
     }
 }

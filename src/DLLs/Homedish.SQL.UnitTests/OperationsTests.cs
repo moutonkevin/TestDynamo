@@ -9,10 +9,12 @@ namespace Homedish.SQL.UnitTests
 {
     public class OperationsTests : IClassFixture<Prerequisites>
     {
+        private readonly Prerequisites _fixture;
         private readonly IOperations _operations = new Operations();
 
         public OperationsTests(Prerequisites fixture)
         {
+            _fixture = fixture;
         }
 
         [Fact]
@@ -87,7 +89,9 @@ namespace Homedish.SQL.UnitTests
 
             var response = await _operations.ExecuteStoredProcedureAsync(configs, async (results) =>
             {
+#pragma warning disable 1998
                 return await results.Read(async () => results.HasRows() ? new SpResponse() : null);
+#pragma warning restore 1998
             });
 
             Assert.Null(response);

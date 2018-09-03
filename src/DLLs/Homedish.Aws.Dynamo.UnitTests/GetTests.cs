@@ -9,14 +9,14 @@ namespace Homedish.Aws.Dynamo.UnitTests
     public class GetTests
     {
         private readonly IOperations _operations = new Operations();
-        private const string _tableName = "kevin-test2";
+        private const string TableName = "kevin-test2";
 
         [Fact]
         public async Task GetBoolValidOperation_Success()
         {
             var model = new GetModel
             {
-                TableName = _tableName,
+                TableName = TableName,
                 PartitionKey = new DynamoField("id", ColumnType.Number, "1"),
                 FieldsToRetrieve = new List<DynamoFieldSchema>
                 {
@@ -35,7 +35,7 @@ namespace Homedish.Aws.Dynamo.UnitTests
         {
             var model = new GetModel
             {
-                TableName = _tableName,
+                TableName = TableName,
                 PartitionKey = new DynamoField("id", ColumnType.Number, "1"),
                 FieldsToRetrieve = new List<DynamoFieldSchema>
                 {
@@ -54,7 +54,7 @@ namespace Homedish.Aws.Dynamo.UnitTests
         {
             var model = new GetModel
             {
-                TableName = _tableName,
+                TableName = TableName,
                 FieldsToRetrieve = new List<DynamoFieldSchema>
                 {
                     new DynamoFieldSchema {ColumnName = "test", ColumnType = ColumnType.String},

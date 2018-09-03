@@ -37,7 +37,7 @@ namespace Homedish.Ably
             }
 
             var @event = GetEvent<TEvent>();
-            var channel = _ablyRealtime.Channels.Get(@event.ChannelName);
+            var channel = AblyRealtime.Channels.Get(@event.ChannelName);
 
             channel.Subscribe(async (m) =>
             {

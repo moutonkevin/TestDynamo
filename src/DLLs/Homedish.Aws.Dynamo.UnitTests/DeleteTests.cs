@@ -50,9 +50,7 @@ namespace Homedish.Aws.Dynamo.UnitTests
         {
             var model = new DeleteModel()
             {
-                Keys = new List<DynamoField>
-                {
-                }
+                Keys = new List<DynamoField>()
             };
 
             var response = await _operations.DeleteAsync(model);
@@ -64,9 +62,7 @@ namespace Homedish.Aws.Dynamo.UnitTests
         [Fact]
         public async Task DeleteNoPrimaryKeyAtAllValidOperation_Failure()
         {
-            var model = new DeleteModel()
-            {
-            };
+            var model = new DeleteModel();
 
             var response = await _operations.DeleteAsync(model);
 
