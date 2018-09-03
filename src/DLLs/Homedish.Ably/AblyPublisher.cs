@@ -1,4 +1,5 @@
-﻿using Homedish.Events.Contracts;
+﻿using System;
+using Homedish.Events.Contracts;
 using IO.Ably;
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
@@ -15,9 +16,10 @@ namespace Homedish.Ably
         {
             var channel = _ablyRealtime.Channels.Get(content.ChannelName);
 
+            content.Creation = DateTime.UtcNow;
+
             var result = await channel.PublishAsync(new Message
             {
-                Name = "name",
                 Data = content
             });
 

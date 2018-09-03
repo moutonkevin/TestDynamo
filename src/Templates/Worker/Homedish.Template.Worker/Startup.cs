@@ -25,6 +25,7 @@ namespace Homedish.Template.Worker
 
             services.AddTransient<IListener, AblyListener>();
             services.AddTransient<IPublisher, AblyPublisher>();
+            services.AddTransient<IHandler<TestEvent>, TestHandler>();
             services.AddTransient<ILogger, Logger>();
         }
 

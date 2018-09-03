@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Reflection;
 using Homedish.Events.Contracts;
 using Homedish.Logging;
 using Microsoft.Extensions.Configuration;
@@ -10,24 +8,18 @@ namespace Homedish.Ably
 {
     public class AblyListener : AblyClient, IListener
     {
-        private ILogger _logger { get; }
+        private ILogger Logger { get; }
+        private IServiceProvider ServiceProvider { get; }
 
-        public AblyListener(ILogger logger, IConfiguration configuration) : base(configuration)
+        public AblyListener(ILogger logger, IConfiguration configuration, IServiceProvider serviceProvider) : base(configuration)
         {
+            Logger = logger;
+            ServiceProvider = serviceProvider;
         }
 
-        private TypeInfo GetHandlerType<TEvent>() where TEvent : Event
+        private IHandler<TEvent> GetHandler<TEvent>() where TEvent : Event
         {
-            return Assembly.GetEntryAssembly()
-                .DefinedTypes
-                .Where(t => t.ImplementedInterfaces
-                    .Any(inter => inter == typeof(IHandler<TEvent>)))
-                .FirstOrDefault();
-        }
-
-        private IHandler<TEvent> GetHandler<TEvent>(TypeInfo handlerType) where TEvent : Event
-        {
-            return (IHandler<TEvent>)Activator.CreateInstance(handlerType);
+            return (IHandler<TEvent>)ServiceProvider.GetService(typeof(IHandler<TEvent>));
         }
 
         private Event GetEvent<TEvent>() where TEvent : Event
@@ -37,14 +29,13 @@ namespace Homedish.Ably
 
         public IListener WithChannel<TEvent>() where TEvent : Event
         {
-            var handlerType = GetHandlerType<TEvent>();
-            if (handlerType == null)
+            var handler = GetHandler<TEvent>();
+            if (handler == default(IHandler<TEvent>))
             {
-                _logger.Warn($"No handler that implements {typeof(IHandler<TEvent>)} was found for the event {typeof(TEvent)}");
+                Logger.Warn($"No handler that implements {typeof(IHandler<TEvent>)} was found for the event {typeof(TEvent)}");
                 return this;
             }
 
-            var handler = GetHandler<TEvent>(handlerType);
             var @event = GetEvent<TEvent>();
             var channel = _ablyRealtime.Channels.Get(@event.ChannelName);
 

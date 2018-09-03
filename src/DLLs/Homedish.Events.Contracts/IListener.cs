@@ -1,7 +1,4 @@
-﻿using System;
-using Homedish.Events.Contracts;
-
-namespace Homedish.Ably
+﻿namespace Homedish.Events.Contracts
 {
     public interface IListener
     {

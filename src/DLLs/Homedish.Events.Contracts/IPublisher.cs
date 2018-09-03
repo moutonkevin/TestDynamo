@@ -1,7 +1,6 @@
-﻿using Homedish.Events.Contracts;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
-namespace Homedish.Ably
+namespace Homedish.Events.Contracts
 {
     public interface IPublisher
     {
