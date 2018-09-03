@@ -1,7 +1,10 @@
-﻿namespace Homedish.Ably
+﻿using System;
+using Homedish.Events.Contracts;
+
+namespace Homedish.Ably
 {
     public interface IListener
     {
-        void StartListening();
+        IListener WithChannel<TEvent>() where TEvent : Event;
     }
 }

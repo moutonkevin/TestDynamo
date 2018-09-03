@@ -1,7 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ably.io" Version="0.8.11" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Homedish.Events.Contracts\Homedish.Events.Contracts.csproj" />
+    <ProjectReference Include="..\Homedish.Logging\Homedish.Logging.csproj" />
+  </ItemGroup>
 
 </Project>
