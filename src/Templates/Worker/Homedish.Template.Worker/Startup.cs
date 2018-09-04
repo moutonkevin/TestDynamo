@@ -1,6 +1,8 @@
 ﻿using Homedish.Ably;
 using Homedish.Events.Contracts;
 using Homedish.Logging;
+using Homedish.Template.Worker.Core.Repositories;
+using Homedish.Template.Worker.Core.Services;
 using Homedish.Template.Worker.Handlers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,6 +28,8 @@ namespace Homedish.Template.Worker
             services.AddTransient<IListener, AblyListener>();
             services.AddTransient<IPublisher, AblyPublisher>();
             services.AddTransient<IHandler<TestEvent>, TestHandler>();
+            services.AddTransient<ITestService, TestService>();
+            services.AddTransient<ITestRepository, TestRepository>();
             services.AddTransient<ILogger, Logger>();
         }
 

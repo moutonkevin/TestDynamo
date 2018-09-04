@@ -9,7 +9,7 @@ namespace Homedish.Ably
 
         public AblyClient(IConfiguration configuration)
         {
-            AblyRealtime = new AblyRealtime(configuration["AblyApiKey"]);
+            AblyRealtime = new AblyRealtime(configuration["Ably:ApiKey"]);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Homedish.Template.Worker
             var listener = host.Services.GetService<IListener>();
 
             listener
-                .WithChannel<TestEvent>();
+                .ListenTo<TestEvent>();
 
             host.Run();
         }

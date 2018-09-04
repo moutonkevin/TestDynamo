@@ -3,7 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <StartupObject>Homedish.Template.Worker.Program</StartupObject>
+    <UserSecretsId>4ebd259c-2b19-4f3b-a9eb-ceeddb025a50</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="secret.bat" />
+  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
@@ -12,12 +17,16 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\DLLs\Homedish.Ably\Homedish.Ably.csproj" />
     <ProjectReference Include="..\..\..\DLLs\Homedish.Logging\Homedish.Logging.csproj" />
+    <ProjectReference Include="..\Homedish.Template.Worker.Core\Homedish.Template.Worker.Core.csproj" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>

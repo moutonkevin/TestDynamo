@@ -780,3 +780,8 @@ src/Templates/Worker/Homedish.Template.Worker.UnitTests/bin/Debug/netcoreapp2.1/
 src/Templates/Worker/Homedish.Template.Worker.UnitTests/bin/Debug/netcoreapp2.1/Homedish.Ably.pdb
 src/Templates/Worker/Homedish.Template.Worker.UnitTests/bin/Debug/netcoreapp2.1/Homedish.Events.Contracts.dll
 src/Templates/Worker/Homedish.Template.Worker.UnitTests/bin/Debug/netcoreapp2.1/Homedish.Events.Contracts.pdb
+src/Templates/Worker/Homedish.Template.Worker/bin/Debug/netcoreapp2.1/Homedish.Models.dll
+src/Templates/Worker/Homedish.Template.Worker/bin/Debug/netcoreapp2.1/Homedish.Models.pdb
+src/Templates/Worker/Homedish.Template.Worker/bin/Debug/netcoreapp2.1/Homedish.Template.Worker.Core.dll
+src/Templates/Worker/Homedish.Template.Worker/bin/Debug/netcoreapp2.1/Homedish.Template.Worker.Core.pdb
+src/Templates/Worker/Homedish.Template.Worker/obj/Debug/netcoreapp2.1/UserSecretsAssemblyInfo.cs

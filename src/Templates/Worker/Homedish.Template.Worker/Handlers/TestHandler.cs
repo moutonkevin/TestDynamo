@@ -1,24 +1,27 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Homedish.Events.Contracts;
 using Homedish.Logging;
+using Homedish.Template.Worker.Core.Services;
 
 namespace Homedish.Template.Worker.Handlers
 {
     public class TestHandler : IHandler<TestEvent>
     {
-        private ILogger Logger { get; }
+        private readonly ITestService _service;
+        private readonly ILogger _logger;
 
-        public TestHandler(ILogger logger)
+        public TestHandler(ILogger logger, ITestService service)
         {
-            Logger = logger;
+            _service = service;
+            _logger = logger;
         }
 
         public async Task<bool> HandleAsync(TestEvent message)
         {
-            Logger.Info($"{nameof(TestEvent)} received", message);
+            _logger.Info($"{nameof(TestEvent)} received", message);
 
-            Console.WriteLine(message.Content);
+            //example
+            _service.Get(message.GetHashCode());
 
             return true;
         }

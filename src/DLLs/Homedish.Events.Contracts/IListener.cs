@@ -2,6 +2,6 @@
 {
     public interface IListener
     {
-        IListener WithChannel<TEvent>() where TEvent : Event;
+        IListener ListenTo<TEvent>() where TEvent : Event;
     }
 }

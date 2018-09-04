@@ -27,7 +27,7 @@ namespace Homedish.Ably
             return (Event)Activator.CreateInstance(typeof(TEvent));
         }
 
-        public IListener WithChannel<TEvent>() where TEvent : Event
+        public IListener ListenTo<TEvent>() where TEvent : Event
         {
             var handler = GetHandler<TEvent>();
             if (handler == default(IHandler<TEvent>))
