@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Homedish.Events.Contracts\Homedish.Events.Contracts.csproj" />
     <ProjectReference Include="..\Homedish.Logging\Homedish.Logging.csproj" />
+    <ProjectReference Include="..\Homedish.WebCore\Homedish.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,6 +4,7 @@ using IO.Ably;
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 using Homedish.Logging;
+using Homedish.WebCore.Cryptography;
 
 namespace Homedish.Ably
 {

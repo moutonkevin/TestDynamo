@@ -1,6 +1,7 @@
 ﻿using System;
 using Homedish.Events.Contracts;
 using Homedish.Logging;
+using Homedish.WebCore.Cryptography;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 

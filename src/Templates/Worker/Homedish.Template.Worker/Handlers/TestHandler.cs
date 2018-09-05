@@ -18,7 +18,7 @@ namespace Homedish.Template.Worker.Handlers
 
         public async Task<bool> HandleAsync(TestEvent message)
         {
-            _logger.Info($"{nameof(TestEvent)} received", message);
+            _logger.Info($"Reiceived {nameof(TestEvent)}", message, nameof(TestEvent));
 
             //example
             _service.Get(message.GetHashCode());
