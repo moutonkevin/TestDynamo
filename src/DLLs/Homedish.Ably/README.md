@@ -1,4 +1,4 @@
-﻿# Push events to a channel:
+﻿# Push events to a channel
 
 1. Add publisher to DI
 
@@ -25,13 +25,13 @@ The TestEvent class will have to inherit from the Event class. The name of the c
 
 3. Create the Handler class
 
-`public class TestHandler : IHandler<TestEvent>
+```public class TestHandler : IHandler<TestEvent>
 {
     public async Task<bool> HandleAsync(TestEvent message)
     {
         ...
     }
-}`
+}```
 
 3. Start listening to events
 
