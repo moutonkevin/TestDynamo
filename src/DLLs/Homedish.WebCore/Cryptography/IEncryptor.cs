@@ -1,4 +1,4 @@
-﻿namespace Homedish.WebCore.Cryptography
+﻿namespace Homedish.Core.Cryptography
 {
     public interface IEncryptor
     {

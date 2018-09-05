@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using ILogger = Homedish.Logging.ILogger;
 
-namespace Homedish.WebCore.Authentication
+namespace Homedish.Core.Authentication
 {
     public class ApiKeyAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {

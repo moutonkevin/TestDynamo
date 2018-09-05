@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Configuration;
 
-namespace Homedish.WebCore.Cryptography
+namespace Homedish.Core.Cryptography
 {
     public class Encryptor : IEncryptor
     {

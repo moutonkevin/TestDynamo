@@ -47,6 +47,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homedish.Events.Contracts",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homedish.Template.Worker.IntegrationTests", "Templates\Worker\Homedish.Template.Worker.IntegrationTests\Homedish.Template.Worker.IntegrationTests.csproj", "{B132853A-DBA7-454E-B42C-0FCCFC615FA3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homedish.Aws.SQS", "DLLs\Homedish.Aws.SQS\Homedish.Aws.SQS.csproj", "{5DED3E11-19E3-4CE0-BA4A-6A20851FFA85}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homedish.Aws.SQS.UnitTests", "DLLs\Homedish.Aws.SQS.UnitTests\Homedish.Aws.SQS.UnitTests.csproj", "{67C1643D-5C3D-4AD0-AC1D-CFAC2D0E7615}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +129,14 @@ Global
 		{B132853A-DBA7-454E-B42C-0FCCFC615FA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B132853A-DBA7-454E-B42C-0FCCFC615FA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B132853A-DBA7-454E-B42C-0FCCFC615FA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DED3E11-19E3-4CE0-BA4A-6A20851FFA85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DED3E11-19E3-4CE0-BA4A-6A20851FFA85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DED3E11-19E3-4CE0-BA4A-6A20851FFA85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DED3E11-19E3-4CE0-BA4A-6A20851FFA85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67C1643D-5C3D-4AD0-AC1D-CFAC2D0E7615}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67C1643D-5C3D-4AD0-AC1D-CFAC2D0E7615}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67C1643D-5C3D-4AD0-AC1D-CFAC2D0E7615}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67C1643D-5C3D-4AD0-AC1D-CFAC2D0E7615}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -150,6 +162,8 @@ Global
 		{288E3ABC-F1B2-487E-95FE-C4813762DD60} = {EC15A95B-98F3-4359-9886-FEAE4235A086}
 		{997D0FF7-7E4B-4F43-B2DA-3A01AE7BD77C} = {B19CE877-1D32-4BB1-B20B-B4C8306743ED}
 		{B132853A-DBA7-454E-B42C-0FCCFC615FA3} = {EC15A95B-98F3-4359-9886-FEAE4235A086}
+		{5DED3E11-19E3-4CE0-BA4A-6A20851FFA85} = {B19CE877-1D32-4BB1-B20B-B4C8306743ED}
+		{67C1643D-5C3D-4AD0-AC1D-CFAC2D0E7615} = {B19CE877-1D32-4BB1-B20B-B4C8306743ED}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1B9646B8-416C-442A-A1D8-EDD2F02A030E}

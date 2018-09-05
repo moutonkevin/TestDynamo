@@ -1,9 +1,9 @@
 ﻿using Homedish.Ably;
+using Homedish.Core.Authentication;
 using Homedish.Events.Contracts;
 using Homedish.Logging;
 using Homedish.Template.Core.Repositories;
 using Homedish.Template.Core.Services;
-using Homedish.WebCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
