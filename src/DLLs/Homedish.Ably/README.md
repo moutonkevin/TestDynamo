@@ -37,7 +37,9 @@ public class TestHandler : IHandler<TestEvent>
 
 3. Start listening to events
 
-`...Services.GetService<IListener>()
-.ListenTo<TestEvent>();`
+```
+DI.Services.GetService<IListener>()
+   .ListenTo<TestEvent>();
+```
 
 
