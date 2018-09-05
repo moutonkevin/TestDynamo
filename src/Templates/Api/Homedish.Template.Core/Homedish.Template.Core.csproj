@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\DLLs\Homedish.Events.Contracts\Homedish.Events.Contracts.csproj" />
     <ProjectReference Include="..\..\..\DLLs\Homedish.Logging\Homedish.Logging.csproj" />
     <ProjectReference Include="..\..\..\DLLs\Homedish.Models\Homedish.Models.csproj" />
   </ItemGroup>

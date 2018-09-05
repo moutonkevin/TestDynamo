@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>016229a1-c1c6-41af-831a-151bf7e4a231</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,10 +11,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\DLLs\Homedish.Ably\Homedish.Ably.csproj" />
+    <ProjectReference Include="..\..\..\DLLs\Homedish.Events.Contracts\Homedish.Events.Contracts.csproj" />
     <ProjectReference Include="..\..\..\DLLs\Homedish.Logging\Homedish.Logging.csproj" />
     <ProjectReference Include="..\..\..\DLLs\Homedish.Models\Homedish.Models.csproj" />
     <ProjectReference Include="..\..\..\DLLs\Homedish.WebCore\Homedish.WebCore.csproj" />

@@ -3,27 +3,44 @@ using Homedish.Events.Contracts;
 using IO.Ably;
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
+using Homedish.Logging;
 
 namespace Homedish.Ably
 {
     public class AblyPublisher : AblyClient, IPublisher
     {
-        public AblyPublisher(IConfiguration configuration) : base(configuration)
+        private readonly ILogger _logger;
+
+        public AblyPublisher(IConfiguration configuration, ILogger logger) : base(configuration)
         {
+            _logger = logger;
         }
 
         public async Task<bool> PublishAsync<TEvent>(TEvent content) where TEvent : Event
         {
             var channel = AblyRealtime.Channels.Get(content.ChannelName);
 
-            content.Creation = DateTime.UtcNow;
+            _logger.Info($"Publishing event {typeof(TEvent)}", content);
 
-            var result = await channel.PublishAsync(new Message
+            try
             {
-                Data = content
-            });
+                var result = await channel.PublishAsync(new Message
+                {
+                    Data = content
+                });
 
-            return result.IsSuccess;
+                if (result.IsFailure)
+                {
+                    _logger.Error($"Failed to publish event {typeof(TEvent)}", nameof(TEvent), content, result.Error.Message);
+                }
+
+                return result.IsSuccess;
+            }
+            catch (Exception exception)
+            {
+                _logger.Error($"Failed to publish event {typeof(TEvent)}", nameof(TEvent), content, exception.ToString());
+                return false;
+            }
         }
     }
 }

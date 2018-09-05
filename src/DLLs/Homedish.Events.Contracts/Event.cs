@@ -5,6 +5,6 @@ namespace Homedish.Events.Contracts
     public abstract class Event
     {
         public abstract string ChannelName { get; set; }
-        public DateTime Creation { get; set; }
+        public DateTime Creation { get; } = DateTime.UtcNow;
     }
 }

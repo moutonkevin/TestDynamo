@@ -1,4 +1,5 @@
-﻿using Homedish.Logging;
+﻿using System.Threading.Tasks;
+using Homedish.Logging;
 using Homedish.Template.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,11 +24,11 @@ namespace Homedish.Template.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public async Task<ActionResult<string>> Get(int id)
         {
             _logger.Info($"Placeholder for {_configurations["FeatureName"]} and ID = {id}");
 
-            var value = _testService.Get(id);
+            var value = await _testService.Get(id);
 
             return value;
         }

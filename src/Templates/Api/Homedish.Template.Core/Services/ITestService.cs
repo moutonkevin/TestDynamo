@@ -1,7 +1,9 @@
-﻿namespace Homedish.Template.Core.Services
+﻿using System.Threading.Tasks;
+
+namespace Homedish.Template.Core.Services
 {
     public interface ITestService
     {
-        string Get(int id);
+        Task<string> Get(int id);
     }
 }

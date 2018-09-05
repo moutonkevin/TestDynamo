@@ -1,4 +1,6 @@
-﻿using Homedish.Logging;
+﻿using Homedish.Ably;
+using Homedish.Events.Contracts;
+using Homedish.Logging;
 using Homedish.Template.Core.Repositories;
 using Homedish.Template.Core.Services;
 using Homedish.WebCore.Authentication;
@@ -30,6 +32,7 @@ namespace Homedish.Template.Api
 
             services.AddTransient<ITestService, TestService>();
             services.AddTransient<ITestRepository, TestRepository>();
+            services.AddTransient<IPublisher, AblyPublisher>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
