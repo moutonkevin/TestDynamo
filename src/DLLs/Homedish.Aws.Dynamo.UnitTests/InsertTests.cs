@@ -10,7 +10,7 @@ namespace Homedish.Aws.Dynamo.UnitTests
     public class InsertTests
     {
 
-        private readonly IDynamoOperations _operations = new Operations();
+        private readonly IDynamoOperations _operations = new DynamoOperations();
         private readonly string _tableName = "kevin-test2";
 
         [Fact]

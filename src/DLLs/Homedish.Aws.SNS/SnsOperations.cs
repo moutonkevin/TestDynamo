@@ -4,12 +4,12 @@ using Amazon.SimpleNotificationService;
 using Amazon.SimpleNotificationService.Model;
 using Homedish.Aws.SQS;
 
-namespace Homedish.Messaging
+namespace Homedish.Aws.SNS
 {
     public class SnsOperations : ISnsOperations
     {
         private readonly ISqsOperations _sqsOperations;
-        private static readonly IAmazonSimpleNotificationService Client = new AmazonSimpleNotificationServiceClient();
+        private readonly IAmazonSimpleNotificationService _client = new AmazonSimpleNotificationServiceClient();
 
         public SnsOperations(ISqsOperations sqsOperations)
         {
@@ -18,7 +18,7 @@ namespace Homedish.Messaging
 
         public async Task<string> TopicExists(string name)
         {
-            var topic = await Client.FindTopicAsync(name);
+            var topic = await _client.FindTopicAsync(name);
 
             return topic.TopicArn;
         }
@@ -27,7 +27,7 @@ namespace Homedish.Messaging
         {
             try
             {
-                var topic = await Client.CreateTopicAsync(new CreateTopicRequest
+                var topic = await _client.CreateTopicAsync(new CreateTopicRequest
                 {
                     Name = name
                 });
@@ -45,7 +45,8 @@ namespace Homedish.Messaging
             try
             {
                 var sqsClient = _sqsOperations.GetClient();
-                return !string.IsNullOrWhiteSpace(await Client.SubscribeQueueAsync(topicArn, sqsClient, queueUrl));
+
+                return !string.IsNullOrWhiteSpace(await _client.SubscribeQueueAsync(topicArn, sqsClient, queueUrl));
             }
             catch (Exception e)
             {

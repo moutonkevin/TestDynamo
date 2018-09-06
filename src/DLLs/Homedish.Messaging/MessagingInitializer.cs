@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Homedish.Aws.SNS;
 using Homedish.Aws.SQS;
 using Homedish.Events.Contracts;
 

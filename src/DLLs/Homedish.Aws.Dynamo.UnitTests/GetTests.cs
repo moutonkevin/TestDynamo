@@ -8,7 +8,7 @@ namespace Homedish.Aws.Dynamo.UnitTests
 {
     public class GetTests
     {
-        private readonly IDynamoOperations _operations = new Operations();
+        private readonly IDynamoOperations _operations = new DynamoOperations();
         private const string TableName = "kevin-test2";
 
         [Fact]

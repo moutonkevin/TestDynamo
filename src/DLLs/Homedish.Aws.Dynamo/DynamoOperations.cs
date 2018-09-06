@@ -13,7 +13,7 @@ using Homedish.Aws.Dynamo.Validation;
 
 namespace Homedish.Aws.Dynamo
 {
-    public class Operations : IDynamoOperations
+    public class DynamoOperations : IDynamoOperations
     {
         private static readonly IAmazonDynamoDB Client = new AmazonDynamoDBClient();
 

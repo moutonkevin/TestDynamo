@@ -9,9 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Homedish.Aws.SNS\Homedish.Aws.SNS.csproj" />
     <ProjectReference Include="..\Homedish.Aws.SQS\Homedish.Aws.SQS.csproj" />
-    <ProjectReference Include="..\Homedish.Events.Contracts\Homedish.Events.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

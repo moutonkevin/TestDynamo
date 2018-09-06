@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Homedish.Messaging
+namespace Homedish.Aws.SNS
 {
     public interface ISnsOperations
     {

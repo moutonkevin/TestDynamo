@@ -13,18 +13,18 @@ namespace Homedish.Aws.SQS
 {
     public class SqsOperations : ISqsOperations
     {
-        private static readonly IAmazonSQS Client = new AmazonSQSClient();
+        private readonly IAmazonSQS _client = new AmazonSQSClient();
 
         public ICoreAmazonSQS GetClient()
         {
-            return Client;
+            return _client;
         }
 
         public async Task<bool> QueueExists(string name)
         {
             try
             {
-                await Client.GetQueueUrlAsync(name);
+                await _client.GetQueueUrlAsync(name);
 
                 return true;
             }
@@ -36,8 +36,8 @@ namespace Homedish.Aws.SQS
 
         public async Task<string> GetQueueArn(string name)
         {
-            var queueUrl = await Client.GetQueueUrlAsync(name);
-            var attributes = await Client.GetAttributesAsync(queueUrl.QueueUrl);
+            var queueUrl = await _client.GetQueueUrlAsync(name);
+            var attributes = await _client.GetAttributesAsync(queueUrl.QueueUrl);
 
             return attributes["QueueArn"];
         }
@@ -54,7 +54,7 @@ namespace Homedish.Aws.SQS
                 }
             };
 
-            var createQueueResponse = await Client.CreateQueueAsync(createQueueRequest);
+            var createQueueResponse = await _client.CreateQueueAsync(createQueueRequest);
 
             return createQueueResponse.QueueUrl;
         }
@@ -67,7 +67,7 @@ namespace Homedish.Aws.SQS
                 MessageBody = JsonConvert.SerializeObject(data)
             };
 
-            var sendMessageResponse = await Client.SendMessageAsync(sendMessageRequest);
+            var sendMessageResponse = await _client.SendMessageAsync(sendMessageRequest);
 
             return sendMessageResponse.HttpStatusCode == HttpStatusCode.OK;
         }
@@ -79,7 +79,7 @@ namespace Homedish.Aws.SQS
                 QueueUrl = configuration.QueueUrl,
             };
 
-            var receiveMessageResponse = await Client.ReceiveMessageAsync(receiveMessageRequest);
+            var receiveMessageResponse = await _client.ReceiveMessageAsync(receiveMessageRequest);
 
             return receiveMessageResponse.Messages.Select(messages => messages.Body).ToList();
         }

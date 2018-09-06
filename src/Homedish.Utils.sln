@@ -51,9 +51,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homedish.Aws.SQS", "DLLs\Ho
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homedish.Aws.SQS.UnitTests", "DLLs\Homedish.Aws.SQS.UnitTests\Homedish.Aws.SQS.UnitTests.csproj", "{67C1643D-5C3D-4AD0-AC1D-CFAC2D0E7615}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homedish.Messaging", "DLLs\Homedish.Messaging\Homedish.Messaging.csproj", "{CD2D4432-B3CE-4C4A-92C5-4D0E0BA0E4EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homedish.Messaging", "DLLs\Homedish.Messaging\Homedish.Messaging.csproj", "{CD2D4432-B3CE-4C4A-92C5-4D0E0BA0E4EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homedish.Messaging.UnitTests", "DLLs\Homedish.Messaging.UnitTests\Homedish.Messaging.UnitTests.csproj", "{E19DCAB2-6969-44DD-9A97-65719676C153}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homedish.Messaging.UnitTests", "DLLs\Homedish.Messaging.UnitTests\Homedish.Messaging.UnitTests.csproj", "{E19DCAB2-6969-44DD-9A97-65719676C153}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homedish.Aws.SNS", "DLLs\Homedish.Aws.SNS\Homedish.Aws.SNS.csproj", "{18214871-21B6-403A-8923-600315AF8026}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -149,6 +151,10 @@ Global
 		{E19DCAB2-6969-44DD-9A97-65719676C153}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E19DCAB2-6969-44DD-9A97-65719676C153}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E19DCAB2-6969-44DD-9A97-65719676C153}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18214871-21B6-403A-8923-600315AF8026}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18214871-21B6-403A-8923-600315AF8026}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18214871-21B6-403A-8923-600315AF8026}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18214871-21B6-403A-8923-600315AF8026}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -178,6 +184,7 @@ Global
 		{67C1643D-5C3D-4AD0-AC1D-CFAC2D0E7615} = {B19CE877-1D32-4BB1-B20B-B4C8306743ED}
 		{CD2D4432-B3CE-4C4A-92C5-4D0E0BA0E4EA} = {B19CE877-1D32-4BB1-B20B-B4C8306743ED}
 		{E19DCAB2-6969-44DD-9A97-65719676C153} = {B19CE877-1D32-4BB1-B20B-B4C8306743ED}
+		{18214871-21B6-403A-8923-600315AF8026} = {B19CE877-1D32-4BB1-B20B-B4C8306743ED}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1B9646B8-416C-442A-A1D8-EDD2F02A030E}
