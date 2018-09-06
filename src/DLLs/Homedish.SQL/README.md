@@ -1,5 +1,11 @@
 ﻿# Execute stored procedures
 
+1. Add to DI
+
+`services.AddTransient<IOperations, Operations>();`
+
+2. Run
+
 ```
 var configs = new StoredProcedureConfiguration
 {
