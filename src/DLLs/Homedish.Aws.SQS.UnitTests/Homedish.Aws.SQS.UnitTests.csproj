@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Homedish.SQS\Homedish.Aws.SQS.csproj" />
+    <ProjectReference Include="..\Homedish.Aws.SQS\Homedish.Aws.SQS.csproj" />
   </ItemGroup>
 
 </Project>

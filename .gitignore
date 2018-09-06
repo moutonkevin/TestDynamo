@@ -913,3 +913,13 @@ src/DLLs/Homedish.Aws.SQS/obj/Homedish.SQS.csproj.nuget.cache
 src/DLLs/Homedish.Aws.SQS/obj/Homedish.SQS.csproj.nuget.g.props
 src/DLLs/Homedish.Aws.SQS/obj/Homedish.SQS.csproj.nuget.g.targets
 src/DLLs/Homedish.Aws.SQS/obj/project.assets.json
+src/DLLs/Homedish.Aws.SQS.UnitTests/bin/Debug/netcoreapp2.1/Homedish.Aws.SQS.UnitTests.deps.json
+src/DLLs/Homedish.Aws.SQS.UnitTests/bin/Debug/netcoreapp2.1/Homedish.Aws.SQS.UnitTests.dll
+src/DLLs/Homedish.Aws.SQS.UnitTests/bin/Debug/netcoreapp2.1/Homedish.Aws.SQS.UnitTests.pdb
+src/DLLs/Homedish.Aws.SQS.UnitTests/bin/Debug/netcoreapp2.1/Homedish.Aws.SQS.UnitTests.runtimeconfig.dev.json
+src/DLLs/Homedish.Aws.SQS.UnitTests/bin/Debug/netcoreapp2.1/Homedish.Aws.SQS.UnitTests.runtimeconfig.json
+src/DLLs/Homedish.Aws.SQS.UnitTests/obj/Debug/netcoreapp2.1/Homedish.Aws.SQS.UnitTests.csproj.CopyComplete
+src/DLLs/Homedish.Aws.SQS.UnitTests/obj/Debug/netcoreapp2.1/Homedish.Aws.SQS.UnitTests.csproj.FileListAbsolute.txt
+src/DLLs/Homedish.Aws.SQS.UnitTests/obj/Debug/netcoreapp2.1/Homedish.Aws.SQS.UnitTests.csprojAssemblyReference.cache
+src/DLLs/Homedish.Aws.SQS.UnitTests/obj/Debug/netcoreapp2.1/Homedish.Aws.SQS.UnitTests.dll
+src/DLLs/Homedish.Aws.SQS.UnitTests/obj/Debug/netcoreapp2.1/Homedish.Aws.SQS.UnitTests.pdb
