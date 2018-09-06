@@ -1,39 +1,43 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Homedish.Aws.SNS;
 using Homedish.Aws.SQS;
 using Homedish.Events.Contracts;
+using Homedish.Messaging.Models;
 
 namespace Homedish.Messaging
 {
-    public class MessagingInitializer
+    public class MessagingInitializer : IMessagingInitializer
     {
-        private static MessagingInitializer _instance = null;
-        private static readonly object Lock = new object();
+        private readonly ISnsOperations _snsOperations;
+        private readonly ISqsOperations _sqsOperations;
 
-        private static ISnsOperations _snsOperations;
-        private static ISqsOperations _sqsOperations;
-
-        private bool _isSuccessfullyInitialized = false;
-
-        public static MessagingInitializer GetInstance()
+        public MessagingInitializer(ISnsOperations snsOperation, ISqsOperations sqsOperations)
         {
-            lock (Lock)
-            {
-                if (_instance == null)
-                {
-                    _sqsOperations = new SqsOperations();
-                    _snsOperations = new SnsOperations(_sqsOperations);
-
-                    _instance = new MessagingInitializer();
-                }
-                return _instance;
-            }
+            _snsOperations = snsOperation;
+            _sqsOperations = sqsOperations;
         }
 
-        public bool IsSuccessfullyInitialized()
+        private readonly IList<MessagingInitializerModel> _events = new List<MessagingInitializerModel>();
+
+        public bool IsSuccessfullyInitialized<TEvent>() where TEvent : Event
         {
-            return _isSuccessfullyInitialized;
+            var @event = _events.FirstOrDefault(e => e.EventType == typeof(TEvent));
+            if (@event == null)
+            {
+                return false;
+            }
+
+            return @event.IsSuccessfullyInitialized;
+        }
+
+        public string GetTopicArn<TEvent>() where TEvent : Event
+        {
+            var @event = _events.FirstOrDefault(e => e.EventType == typeof(TEvent));
+
+            return @event?.TopicArn;
         }
 
         private async Task<string> GetTopicArn(string snsTopicName)
@@ -52,22 +56,38 @@ namespace Homedish.Messaging
             {
                 return await _sqsOperations.CreateQueue(queueName, 42000);
             }
-            return await _sqsOperations.GetQueueArn(queueName);
+            return await _sqsOperations.GetQueueUrl(queueName);
+        }
+
+        private async Task<bool> LinkTopicToQueue(string topicArn, string queueUrl)
+        {
+            if (await _snsOperations.IsTopicLinkedToQueue(topicArn, queueUrl))
+            {
+                return true;
+            }
+            return await _snsOperations.LinkTopicToQueue(topicArn, queueUrl);
         }
 
         public async Task<bool> SetupMessageBusWithSnsAndSqs<TEvent>() where TEvent : Event
         {
             var @event = (Event) Activator.CreateInstance<TEvent>();
 
-            var snsTopicName = $"sns-{@event.ChannelName.ToLowerInvariant()}";
-            var queueName = $"sqs-{@event.ChannelName.ToLowerInvariant()}";
+            var snsTopicName = EventUtils.GetTopicName(@event);
+            var queueName = EventUtils.GetQueueName(@event);
 
             var snsTopicArn = await GetTopicArn(snsTopicName);
             var queueUrl = await GetQueueUrl(queueName);
 
-            _isSuccessfullyInitialized = await _snsOperations.LinkTopicToQueue(snsTopicArn, queueUrl);
+            var isSuccessfullyInitialized = await LinkTopicToQueue(snsTopicArn, queueUrl);
 
-            return _isSuccessfullyInitialized;
+            _events.Add(new MessagingInitializerModel
+            {
+                TopicArn = snsTopicArn,
+                EventType = typeof(TEvent),
+                IsSuccessfullyInitialized = isSuccessfullyInitialized
+            });
+
+            return isSuccessfullyInitialized;
         }
     }
 }

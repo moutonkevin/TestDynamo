@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Homedish.Aws.SQS\Homedish.Aws.SQS.csproj" />
+    <ProjectReference Include="..\Homedish.Events.Contracts\Homedish.Events.Contracts.csproj" />
+    <ProjectReference Include="..\Homedish.Logging\Homedish.Logging.csproj" />
   </ItemGroup>
 
 </Project>

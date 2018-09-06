@@ -1,31 +1,47 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Homedish.Aws.SNS;
 using Homedish.Events.Contracts;
+using Homedish.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Homedish.Messaging
 {
     public class MessagingProcessor : IMessagingProcessor
     {
-        private readonly MessagingInitializer _messagingInitializer = MessagingInitializer.GetInstance();
+        private readonly IMessagingInitializer _messagingInitializer;
+        private readonly ISnsOperations _snsOperations;
 
-        public async Task Send<TEvent>(TEvent @event) where TEvent : Event
+        public MessagingProcessor(ILogger logger)
         {
-            if (_messagingInitializer.IsSuccessfullyInitialized())
-            {
-                await SendInternal(@event);
-            }
-            else
-            {
-                if (await _messagingInitializer.SetupMessageBusWithSnsAndSqs<TEvent>())
-                {
-                    await SendInternal(@event);
-                }
-            }
+            Ioc.InjectNonParamaterableServices();
+            Ioc.InjectParamaterableServices<ILogger>(logger);
+            Ioc.BuildServiceProvider();
+
+            _snsOperations = Ioc.Services.GetService<ISnsOperations>();
+            _messagingInitializer = Ioc.Services.GetService<IMessagingInitializer>();
         }
 
-        private async Task SendInternal<TEvent>(TEvent @event) where TEvent : Event
+        public async Task<bool> Send<TEvent>(TEvent @event) where TEvent : Event
         {
+            if (_messagingInitializer.IsSuccessfullyInitialized<TEvent>())
+            {
+                return await SendInternal(@event);
+            }
 
+            if (await _messagingInitializer.SetupMessageBusWithSnsAndSqs<TEvent>())
+            {
+                return await SendInternal(@event);
+            }
+
+            return false;
+        }
+
+        private async Task<bool> SendInternal<TEvent>(TEvent @event) where TEvent : Event
+        {
+            var topicArn = _messagingInitializer.GetTopicArn<TEvent>();
+
+            return await _snsOperations.Publish(@event, topicArn);
         }
 
         public async Task Receive<TEvent>() where TEvent : Event

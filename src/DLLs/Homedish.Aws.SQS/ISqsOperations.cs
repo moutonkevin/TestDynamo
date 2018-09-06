@@ -9,7 +9,7 @@ namespace Homedish.Aws.SQS
     {
         ICoreAmazonSQS GetClient();
         Task<bool> QueueExists(string name);
-        Task<string> GetQueueArn(string name);
+        Task<string> GetQueueUrl(string name);
         Task<string> CreateQueue(string name, int maxKeepDurationSeconds);
         Task<bool> Enqueue(QueueConfiguration configuration, object data);
         Task<IEnumerable<string>> Dequeue(QueueConfiguration configuration);
