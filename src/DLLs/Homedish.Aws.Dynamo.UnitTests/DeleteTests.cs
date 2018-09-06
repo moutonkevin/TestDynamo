@@ -8,7 +8,7 @@ namespace Homedish.Aws.Dynamo.UnitTests
 {
     public class DeleteTests
     {
-        private readonly IOperations _operations = new Operations();
+        private readonly IDynamoOperations _operations = new Operations();
         private readonly string _tableName = "kevin-test";
 
         [Fact]

@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Amazon.Runtime.SharedInterfaces;
 using Amazon.SQS;
 using Amazon.SQS.Model;
 using Homedish.Aws.SQS.Models;
@@ -9,11 +11,38 @@ using Newtonsoft.Json;
 
 namespace Homedish.Aws.SQS
 {
-    public class Operations : IOperations
+    public class SqsOperations : ISqsOperations
     {
         private static readonly IAmazonSQS Client = new AmazonSQSClient();
 
-        public async Task<bool> CreateQueue(string name, int maxKeepDurationSeconds)
+        public ICoreAmazonSQS GetClient()
+        {
+            return Client;
+        }
+
+        public async Task<bool> QueueExists(string name)
+        {
+            try
+            {
+                await Client.GetQueueUrlAsync(name);
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<string> GetQueueArn(string name)
+        {
+            var queueUrl = await Client.GetQueueUrlAsync(name);
+            var attributes = await Client.GetAttributesAsync(queueUrl.QueueUrl);
+
+            return attributes["QueueArn"];
+        }
+
+        public async Task<string> CreateQueue(string name, int maxKeepDurationSeconds)
         {
             var createQueueRequest = new CreateQueueRequest
             {
@@ -27,7 +56,7 @@ namespace Homedish.Aws.SQS
 
             var createQueueResponse = await Client.CreateQueueAsync(createQueueRequest);
 
-            return createQueueResponse.HttpStatusCode == HttpStatusCode.OK;
+            return createQueueResponse.QueueUrl;
         }
 
         public async Task<bool> Enqueue(QueueConfiguration configuration, object data)

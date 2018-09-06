@@ -9,7 +9,7 @@ namespace Homedish.Aws.Dynamo.UnitTests
 {
     public class QueryTests
     {
-        private readonly IOperations _operations = new Operations();
+        private readonly IDynamoOperations _operations = new Operations();
         private readonly string _tableName = "kevin-test";
         private readonly string _indexName = "id-index";
 

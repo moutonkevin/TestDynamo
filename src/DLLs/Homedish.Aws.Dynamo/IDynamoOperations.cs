@@ -6,7 +6,7 @@ using Homedish.Aws.Dynamo.Model.Query;
 
 namespace Homedish.Aws.Dynamo
 {
-    public interface IOperations
+    public interface IDynamoOperations
     {
         Task<InsertResponseModel> InsertAsync(InsertModel value);
         Task<GetResponseModel> GetAsync(GetModel value);
