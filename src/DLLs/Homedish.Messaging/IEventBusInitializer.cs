@@ -3,7 +3,7 @@ using Homedish.Events.Contracts;
 
 namespace Homedish.Messaging
 {
-    public interface IMessagingInitializer
+    public interface IEventBusInitializer
     {
         bool IsSuccessfullyInitialized<TEvent>() where TEvent : Event;
         string GetTopicArn<TEvent>() where TEvent : Event;

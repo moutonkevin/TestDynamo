@@ -98,13 +98,20 @@ namespace Homedish.Aws.SQS
                 QueueUrl = queueUrl,
             };
 
-            var receiveMessageResponse = await _client.ReceiveMessageAsync(receiveMessageRequest);
-            if (receiveMessageResponse.HttpStatusCode != HttpStatusCode.OK)
+            try
             {
-                _logger.Error($"Could not dequeue in {queueUrl}", receiveMessageResponse.HttpStatusCode);
-            }
+                var receiveMessageResponse = await _client.ReceiveMessageAsync(receiveMessageRequest);
+                if (receiveMessageResponse.HttpStatusCode != HttpStatusCode.OK)
+                {
+                    _logger.Error($"Could not dequeue in {queueUrl}", receiveMessageResponse.HttpStatusCode);
+                }
 
-            return receiveMessageResponse.Messages.Select(messages => messages.Body).ToList();
+                return receiveMessageResponse.Messages.Select(messages => messages.Body).ToList();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         public async Task<IEnumerable<string>> Dequeue(QueueConfiguration configuration)

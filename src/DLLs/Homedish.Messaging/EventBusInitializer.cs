@@ -9,12 +9,12 @@ using Homedish.Messaging.Models;
 
 namespace Homedish.Messaging
 {
-    public class MessagingInitializer : IMessagingInitializer
+    public class EventBusInitializer : IEventBusInitializer
     {
         private readonly ISnsOperations _snsOperations;
         private readonly ISqsOperations _sqsOperations;
 
-        public MessagingInitializer(ISnsOperations snsOperation, ISqsOperations sqsOperations)
+        public EventBusInitializer(ISnsOperations snsOperation, ISqsOperations sqsOperations)
         {
             _snsOperations = snsOperation;
             _sqsOperations = sqsOperations;
