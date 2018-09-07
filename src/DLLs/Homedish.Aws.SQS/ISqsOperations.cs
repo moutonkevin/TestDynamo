@@ -13,5 +13,6 @@ namespace Homedish.Aws.SQS
         Task<string> CreateQueue(string name, int maxKeepDurationSeconds);
         Task<bool> Enqueue(QueueConfiguration configuration, object data);
         Task<IEnumerable<string>> Dequeue(QueueConfiguration configuration);
+        Task<IEnumerable<string>> Dequeue(string queueUrl);
     }
 }

@@ -40,6 +40,13 @@ namespace Homedish.Messaging
             return @event?.TopicArn;
         }
 
+        public string GetQueueUrl<TEvent>() where TEvent : Event
+        {
+            var @event = _events.FirstOrDefault(e => e.EventType == typeof(TEvent));
+
+            return @event?.QueueUrl;
+        }
+
         private async Task<string> GetTopicArn(string snsTopicName)
         {
             var topicArn = await _snsOperations.TopicExists(snsTopicName);
@@ -84,7 +91,8 @@ namespace Homedish.Messaging
             {
                 TopicArn = snsTopicArn,
                 EventType = typeof(TEvent),
-                IsSuccessfullyInitialized = isSuccessfullyInitialized
+                IsSuccessfullyInitialized = isSuccessfullyInitialized,
+                QueueUrl = queueUrl
             });
 
             return isSuccessfullyInitialized;

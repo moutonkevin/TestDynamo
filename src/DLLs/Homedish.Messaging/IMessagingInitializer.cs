@@ -7,6 +7,7 @@ namespace Homedish.Messaging
     {
         bool IsSuccessfullyInitialized<TEvent>() where TEvent : Event;
         string GetTopicArn<TEvent>() where TEvent : Event;
+        string GetQueueUrl<TEvent>() where TEvent : Event;
         Task<bool> SetupMessageBusWithSnsAndSqs<TEvent>() where TEvent : Event;
     }
 }

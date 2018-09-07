@@ -6,6 +6,7 @@ namespace Homedish.Messaging.Models
     {
         public Type EventType { get; set; }
         public string TopicArn { get; set; }
+        public string QueueUrl { get; set; }
         public bool IsSuccessfullyInitialized { get; set; } = false;
     }
 }
