@@ -1,5 +1,5 @@
-﻿using System.Text;
-using Homedish.Events.Contracts;
+﻿using Homedish.Events.Contracts;
+using Homedish.Template.Worker.Handlers;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,8 +13,8 @@ namespace Homedish.Template.Worker
             var host = CreateWebHostBuilder(args).Build();
             var listener = host.Services.GetService<IListener>();
 
-            //listener
-            //    .Listen<TestEvent>();
+            listener
+                .StartListening<TestEvent, TestHandler>();
 
             host.Run();
         }

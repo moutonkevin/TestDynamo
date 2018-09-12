@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Homedish.Aws.SNS;
 using Homedish.Aws.SQS;
@@ -16,6 +15,7 @@ namespace Homedish.Messaging
         private readonly IEventBusInitializer _eventBusInitializer;
         private readonly ISnsOperations _snsOperations;
         private readonly ISqsOperations _sqsOperations;
+        private readonly ILogger _logger;
 
         public EventBus(ILogger logger)
         {
@@ -23,6 +23,7 @@ namespace Homedish.Messaging
             Ioc.InjectParamaterableServices(logger);
             Ioc.BuildServiceProvider();
 
+            _logger = logger;
             _snsOperations = Ioc.Services.GetService<ISnsOperations>();
             _sqsOperations = Ioc.Services.GetService<ISqsOperations>();
             _eventBusInitializer = Ioc.Services.GetService<IEventBusInitializer>();
@@ -31,6 +32,8 @@ namespace Homedish.Messaging
         private async Task<bool> PublishInternalAsync<TEvent>(TEvent @event) where TEvent : Event
         {
             var topicArn = _eventBusInitializer.GetTopicArn<TEvent>();
+
+            _logger.Info($"Publishing {typeof(TEvent)}", @event);
 
             return await _snsOperations.Publish(@event, topicArn);
         }
@@ -65,20 +68,29 @@ namespace Homedish.Messaging
 
                     foreach (var eventReceivedRaw in eventsReceived)
                     {
+                        _logger.Info($"Received {typeof(TEvent)}", eventReceivedRaw.Body);
+
                         var eventReceived = JsonConvert.DeserializeObject<SqsPulledObject>(eventReceivedRaw.Body);
 
-                        var isHandledSuccessfully = await handler.HandleAsync(JsonConvert.DeserializeObject<TEvent>(eventReceived.Message));
+                        try
+                        {
+                            var isHandledSuccessfully = await handler.HandleAsync(JsonConvert.DeserializeObject<TEvent>(eventReceived.Message));
 
-                        if (isHandledSuccessfully)
-                        {
-                            #pragma warning disable CS4014
-                            Task.Run(() =>_sqsOperations.Delete(queueUrl, eventReceivedRaw));
-                            #pragma warning restore CS4014
+                            if (isHandledSuccessfully)
+                            {
+                                #pragma warning disable CS4014
+                                Task.Run(() => _sqsOperations.Delete(queueUrl, eventReceivedRaw));
+                                #pragma warning restore CS4014
+                            }
+                            else
+                            {
+                                //TODO
+                                //Dead letter queue
+                            }
                         }
-                        else
+                        catch (Exception e)
                         {
-                            //TODO
-                            //Dead letter queue
+                            _logger.Error($"An unexpected error happened when processing the message {typeof(TEvent)}. {e}");
                         }
                     }
                 }

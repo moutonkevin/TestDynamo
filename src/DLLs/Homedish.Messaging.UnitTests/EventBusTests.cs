@@ -10,7 +10,7 @@ namespace Homedish.Messaging.UnitTests
 {
     public class EventBusTests
     {
-        private ServiceCollection Services { get; } = new ServiceCollection();
+        private IServiceCollection Services { get; } = new ServiceCollection();
 
         public EventBusTests()
         {
@@ -21,8 +21,8 @@ namespace Homedish.Messaging.UnitTests
         {
             //Setup
             Services
-                .AddTransient<ILogger, Logger>()
-                .AddTransient<IPublisher, EventBus>();
+                .AddTransient<IPublisher, EventBus>()
+                .AddCustomLogging();
 
             var serviceProvider = Services.BuildServiceProvider();
 
@@ -43,9 +43,9 @@ namespace Homedish.Messaging.UnitTests
         {
             //Setup
             Services
-                .AddTransient<ILogger, Logger>()
                 .AddTransient<IListener, EventBus>()
-                .AddTransient<IPublisher, EventBus>();
+                .AddTransient<IPublisher, EventBus>()
+                .AddCustomLogging();
 
             var serviceProvider = Services.BuildServiceProvider();
 
@@ -74,9 +74,9 @@ namespace Homedish.Messaging.UnitTests
         {
             //Setup
             Services
-                .AddTransient<ILogger, Logger>()
                 .AddTransient<IListener, EventBus>()
-                .AddTransient<IPublisher, EventBus>();
+                .AddTransient<IPublisher, EventBus>()
+                .AddCustomLogging();
 
             var serviceProvider = Services.BuildServiceProvider();
 

@@ -102,7 +102,7 @@ namespace Homedish.Aws.SNS
                     return true;
                 }
 
-                _logger.Info($"The topic {topicArn} is already linked to the queue {queueUrl}");
+                _logger.Info($"The topic {topicArn} is not linked to the queue {queueUrl}");
                 return false;
             }
             catch (Exception exception)
@@ -116,9 +116,11 @@ namespace Homedish.Aws.SNS
         {
             try
             {
+                var message = JsonConvert.SerializeObject(@event);
+
                 var publishResponse = await _client.PublishAsync(new PublishRequest()
                 {
-                    Message = JsonConvert.SerializeObject(@event),
+                    Message = message,
                     TopicArn = topicArn
                 });
 
@@ -126,6 +128,8 @@ namespace Homedish.Aws.SNS
                 {
                     _logger.Error($"Could not publish to {EventUtils.GetTopicName(@event)}");
                 }
+
+                _logger.Info($"Published {typeof(TEvent)} to {EventUtils.GetTopicName(@event)}", message);
 
                 return publishResponse.HttpStatusCode == HttpStatusCode.OK;
             }

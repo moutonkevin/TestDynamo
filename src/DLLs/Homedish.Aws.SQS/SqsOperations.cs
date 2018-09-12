@@ -48,9 +48,24 @@ namespace Homedish.Aws.SQS
 
         public async Task<string> GetQueueUrl(string name)
         {
-            var queueUrl = await _client.GetQueueUrlAsync(name);
+            try
+            {
+                var queueUrlResponse = await _client.GetQueueUrlAsync(name);
 
-            return queueUrl.QueueUrl;
+                if (queueUrlResponse.HttpStatusCode != HttpStatusCode.OK)
+                {
+                    _logger.Error($"Could not get the queue url for {name}", queueUrlResponse.HttpStatusCode);
+                    return null;
+                }
+
+               return queueUrlResponse.QueueUrl;
+            }
+            catch (Exception e)
+            {
+                _logger.Error($"Could not get the queue url for {name}", e.ToString());
+
+                return null;
+            }
         }
 
         public async Task<string> CreateQueue(string name, int maxKeepDurationSeconds)
@@ -89,18 +104,6 @@ namespace Homedish.Aws.SQS
             }
 
             return sendMessageResponse.HttpStatusCode == HttpStatusCode.OK;
-        }
-
-        private async Task DeleteAllDequeued(string queueUrl, IList<Message> messages)
-        {
-            foreach (var message in messages)
-            {
-                await _client.DeleteMessageAsync(new DeleteMessageRequest
-                {
-                    QueueUrl = queueUrl,
-                    ReceiptHandle = message.ReceiptHandle
-                });
-            }
         }
 
         private async Task<IEnumerable<Message>> DequeueInternal(string queueUrl)
