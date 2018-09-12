@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Amazon.Runtime.SharedInterfaces;
+using Amazon.SQS.Model;
 using Homedish.Aws.SQS.Models;
 
 namespace Homedish.Aws.SQS
@@ -12,7 +13,8 @@ namespace Homedish.Aws.SQS
         Task<string> GetQueueUrl(string name);
         Task<string> CreateQueue(string name, int maxKeepDurationSeconds);
         Task<bool> Enqueue(QueueConfiguration configuration, object data);
-        Task<IEnumerable<string>> Dequeue(QueueConfiguration configuration);
-        Task<IEnumerable<string>> Dequeue(string queueUrl);
+        Task<IEnumerable<Message>> Dequeue(QueueConfiguration configuration);
+        Task<IEnumerable<Message>> Dequeue(string queueUrl);
+        Task Delete(string queueUrl, Message message);
     }
 }

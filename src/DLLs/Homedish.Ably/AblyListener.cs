@@ -19,7 +19,7 @@ namespace Homedish.Ably
 
         private IHandler<TEvent> GetHandler<TEvent>() where TEvent : Event
         {
-            return (IHandler<TEvent>)ServiceProvider.GetService(typeof(IHandler<TEvent>));
+            return Activator.CreateInstance<IHandler<TEvent>>();
         }
 
         private Event GetEvent<TEvent>() where TEvent : Event
@@ -27,7 +27,14 @@ namespace Homedish.Ably
             return (Event)Activator.CreateInstance(typeof(TEvent));
         }
 
-        public IListener ListenTo<TEvent>() where TEvent : Event
+        public void StopListening()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IListener StartListening<TEvent, THandler>() 
+            where TEvent : Event 
+            where THandler : IHandler<TEvent>
         {
             var handler = GetHandler<TEvent>();
             if (handler == default(IHandler<TEvent>))
@@ -47,9 +54,12 @@ namespace Homedish.Ably
             return this;
         }
 
-        public void StopListening()
+        public void StopListening<TEvent>() where TEvent : Event
         {
-            throw new NotImplementedException();
+            var @event = GetEvent<TEvent>();
+            var channel = AblyRealtime.Channels.Get(@event.ChannelName);
+
+            channel.Unsubscribe();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Homedish.Aws.SQS.UnitTests
         [Fact]
         public async Task Test1()
         {
-            SqsOperations qc = new SqsOperations();
+            //SqsOperations qc = new SqsOperations();
 
            // await qc.CreateQueue("test-sqs-qa53", 43000);
         }

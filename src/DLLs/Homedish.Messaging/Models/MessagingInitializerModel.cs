@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace Homedish.Messaging.Models
 {
@@ -8,5 +9,6 @@ namespace Homedish.Messaging.Models
         public string TopicArn { get; set; }
         public string QueueUrl { get; set; }
         public bool IsSuccessfullyInitialized { get; set; } = false;
+        public CancellationTokenSource CancellationToken { get; set; }
     }
 }

@@ -91,7 +91,19 @@ namespace Homedish.Aws.SQS
             return sendMessageResponse.HttpStatusCode == HttpStatusCode.OK;
         }
 
-        private async Task<IEnumerable<string>> DequeueInternal(string queueUrl)
+        private async Task DeleteAllDequeued(string queueUrl, IList<Message> messages)
+        {
+            foreach (var message in messages)
+            {
+                await _client.DeleteMessageAsync(new DeleteMessageRequest
+                {
+                    QueueUrl = queueUrl,
+                    ReceiptHandle = message.ReceiptHandle
+                });
+            }
+        }
+
+        private async Task<IEnumerable<Message>> DequeueInternal(string queueUrl)
         {
             var receiveMessageRequest = new ReceiveMessageRequest
             {
@@ -106,7 +118,7 @@ namespace Homedish.Aws.SQS
                     _logger.Error($"Could not dequeue in {queueUrl}", receiveMessageResponse.HttpStatusCode);
                 }
 
-                return receiveMessageResponse.Messages.Select(messages => messages.Body).ToList();
+                return receiveMessageResponse.Messages.ToList();
             }
             catch (Exception e)
             {
@@ -114,14 +126,23 @@ namespace Homedish.Aws.SQS
             }
         }
 
-        public async Task<IEnumerable<string>> Dequeue(QueueConfiguration configuration)
+        public async Task<IEnumerable<Message>> Dequeue(QueueConfiguration configuration)
         {
             return await DequeueInternal(configuration.QueueUrl);
         }
 
-        public async Task<IEnumerable<string>> Dequeue(string queueUrl)
+        public async Task<IEnumerable<Message>> Dequeue(string queueUrl)
         {
             return await DequeueInternal(queueUrl);
+        }
+
+        public async Task Delete(string queueUrl, Message message)
+        {
+            await _client.DeleteMessageAsync(new DeleteMessageRequest
+            {
+                QueueUrl = queueUrl,
+                ReceiptHandle = message.ReceiptHandle
+            });
         }
     }
 }

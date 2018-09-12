@@ -2,6 +2,11 @@
 {
     public interface IListener
     {
-        IListener ListenTo<TEvent>() where TEvent : Event;
+        IListener StartListening<TEvent, THandler>() 
+            where TEvent : Event 
+            where THandler : IHandler<TEvent>;
+
+        void StopListening<TEvent>()
+            where TEvent : Event;
     }
 }

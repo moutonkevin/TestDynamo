@@ -1,12 +1,9 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using Homedish.Aws.SNS;
-using Homedish.Aws.SQS;
 using Homedish.Events.Contracts;
 using Homedish.Logging;
+using Homedish.Messaging.UnitTests.Handlers;
 using Microsoft.Extensions.DependencyInjection;
-using Moq;
 using Xunit;
 
 namespace Homedish.Messaging.UnitTests
@@ -17,45 +14,36 @@ namespace Homedish.Messaging.UnitTests
 
         public EventBusTests()
         {
-            Services
-                .AddTransient<ILogger, Logger>();
         }
 
         [Fact]
         public async Task PublishAsync_ReturnsTrue()
         {
+            //Setup
             Services
                 .AddTransient<ILogger, Logger>()
-                .AddTransient<ISnsOperations, SnsOperations>()
-                .AddTransient<ISqsOperations, SqsOperations>()
-                .AddTransient<IPublisher, EventBus>()
-                .AddSingleton<IEventBusInitializer, EventBusInitializer>();
+                .AddTransient<IPublisher, EventBus>();
 
             var serviceProvider = Services.BuildServiceProvider();
 
             var messagingProcessor = serviceProvider.GetService<IPublisher>();
 
+            //Act
             var isSuccess = await messagingProcessor.PublishAsync(new TestEvent
             {
                 Content = "hello"
             });
 
+            //Assert
             Assert.True(isSuccess);
         }
 
         [Fact]
-        public async Task ListenTo_AtLeastOneEventPulledFromQueue()
+        public async Task StartListening_AtLeastOneEventPulledFromQueue()
         {
             //Setup
-
-            var handlerMock = new Mock<IHandler<TestEvent>>();
-
             Services
                 .AddTransient<ILogger, Logger>()
-                .AddTransient<ISnsOperations, SnsOperations>()
-                .AddTransient<ISqsOperations, SqsOperations>()
-                .AddSingleton<IEventBusInitializer, EventBusInitializer>()
-                .AddSingleton<IHandler<TestEvent>>(handlerMock.Object)
                 .AddTransient<IListener, EventBus>()
                 .AddTransient<IPublisher, EventBus>();
 
@@ -65,19 +53,58 @@ namespace Homedish.Messaging.UnitTests
             var publisher = serviceProvider.GetService<IPublisher>();
 
             //Act
-
             var isPublished = await publisher.PublishAsync(new TestEvent
             {
                 Content = "test"
             });
 
-            listener.ListenTo<TestEvent>();
+            Thread.Sleep(1000);
+
+            listener.StartListening<TestEvent, TestEventHandler>();
 
             Thread.Sleep(1000);
 
             //Assert
             Assert.True(isPublished);
-            handlerMock.Verify(s => s.HandleAsync(It.IsAny<TestEvent>()), Times.AtLeastOnce);
+            Assert.True(TestEventHandler.HasBeenCalled);
+        }
+
+        [Fact]
+        public async Task StartListening_AllEventsPulledFromQueue()
+        {
+            //Setup
+            Services
+                .AddTransient<ILogger, Logger>()
+                .AddTransient<IListener, EventBus>()
+                .AddTransient<IPublisher, EventBus>();
+
+            var serviceProvider = Services.BuildServiceProvider();
+
+            var listener = serviceProvider.GetService<IListener>();
+            var publisher = serviceProvider.GetService<IPublisher>();
+
+            //Act
+            await publisher.PublishAsync(new TestEvent { Content = "test" });
+
+            Thread.Sleep(1000);
+
+            listener.StartListening<TestEvent, TestEventHandler>();
+
+            Thread.Sleep(1000);
+
+            //Assert
+            Assert.True(TestEventHandler.HasBeenCalled);
+
+            //Setup
+            TestEventHandler.HasBeenCalled = false;
+
+            //Act
+            await publisher.PublishAsync(new TestEvent { Content = "test" });
+
+            Thread.Sleep(25000);
+
+            //Assert
+            Assert.True(TestEventHandler.HasBeenCalled);
         }
     }
 }

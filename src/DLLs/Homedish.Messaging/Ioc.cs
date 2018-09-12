@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Linq;
 using Homedish.Aws.SNS;
 using Homedish.Aws.SQS;
-using Homedish.Logging;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Homedish.Messaging
 {
     public static class Ioc
     {
-        public static readonly ServiceCollection services = new ServiceCollection();
+        private static readonly ServiceCollection services = new ServiceCollection();
         public static IServiceProvider Services { get; set; }
 
         public static void InjectNonParamaterableServices()

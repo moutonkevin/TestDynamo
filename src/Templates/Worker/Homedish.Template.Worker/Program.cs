@@ -13,8 +13,8 @@ namespace Homedish.Template.Worker
             var host = CreateWebHostBuilder(args).Build();
             var listener = host.Services.GetService<IListener>();
 
-            listener
-                .ListenTo<TestEvent>();
+            //listener
+            //    .Listen<TestEvent>();
 
             host.Run();
         }

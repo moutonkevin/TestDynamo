@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Homedish.Aws.SNS;
 using Homedish.Aws.SQS;
@@ -45,6 +46,13 @@ namespace Homedish.Messaging
             var @event = _events.FirstOrDefault(e => e.EventType == typeof(TEvent));
 
             return @event?.QueueUrl;
+        }
+
+        public CancellationTokenSource GetCancellationToken<TEvent>() where TEvent : Event
+        {
+            var @event = _events.FirstOrDefault(e => e.EventType == typeof(TEvent));
+
+            return @event?.CancellationToken;
         }
 
         private async Task<string> GetTopicArn(string snsTopicName)
@@ -92,7 +100,9 @@ namespace Homedish.Messaging
                 TopicArn = snsTopicArn,
                 EventType = typeof(TEvent),
                 IsSuccessfullyInitialized = isSuccessfullyInitialized,
-                QueueUrl = queueUrl
+                QueueUrl = queueUrl,
+                CancellationToken = new CancellationTokenSource()
+                
             });
 
             return isSuccessfullyInitialized;

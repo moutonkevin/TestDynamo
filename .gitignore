@@ -1017,3 +1017,7 @@ src/DLLs/Homedish.Messaging/bin/Debug/netcoreapp2.1/Homedish.Logging.dll
 src/DLLs/Homedish.Messaging/bin/Debug/netcoreapp2.1/Homedish.Logging.pdb
 src/DLLs/Homedish.Messaging/bin/Debug/netcoreapp2.1/Microsoft.Extensions.DependencyInjection.dll
 src/DLLs/Homedish.Messaging/bin/Debug/netcoreapp2.1/Microsoft.Extensions.DependencyInjection.xml
+src/DLLs/Homedish.Aws.SQS/bin/Debug/netcoreapp2.1/Homedish.Events.Contracts.dll
+src/DLLs/Homedish.Aws.SQS/bin/Debug/netcoreapp2.1/Homedish.Events.Contracts.pdb
+src/DLLs/Homedish.Aws.SQS.UnitTests/bin/Debug/netcoreapp2.1/Homedish.Events.Contracts.dll
+src/DLLs/Homedish.Aws.SQS.UnitTests/bin/Debug/netcoreapp2.1/Homedish.Events.Contracts.pdb
