@@ -10,6 +10,6 @@ namespace Homedish.Messaging
         string GetTopicArn<TEvent>() where TEvent : Event;
         string GetQueueUrl<TEvent>() where TEvent : Event;
         CancellationTokenSource GetCancellationToken<TEvent>() where TEvent : Event;
-        Task<bool> SetupMessageBusWithSnsAndSqs<TEvent>() where TEvent : Event;
+        Task<bool> SetupMessageBusWithSnsAndSqs<TEvent>(EventConfiguration configuration) where TEvent : Event;
     }
 }

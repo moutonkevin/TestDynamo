@@ -99,7 +99,7 @@ namespace Homedish.Messaging
             TaskCreationOptions.LongRunning, TaskScheduler.Default);
         }
 
-        public IListener StartListening<TEvent, THandler>() 
+        public IListener StartListening<TEvent, THandler>(EventConfiguration configuration) 
             where TEvent : Event 
             where THandler : IHandler<TEvent>
         {
@@ -108,7 +108,12 @@ namespace Homedish.Messaging
                 ListenToInternal<TEvent, THandler>();
             }
 
-            var setupTask = _eventBusInitializer.SetupMessageBusWithSnsAndSqs<TEvent>();
+            if (configuration == null)
+            {
+                configuration = new DefaultEventConfiguration();
+            }
+
+            var setupTask = _eventBusInitializer.SetupMessageBusWithSnsAndSqs<TEvent>(configuration);
             setupTask.Wait();
 
             if (setupTask.Result)

@@ -32,7 +32,7 @@ namespace Homedish.Ably
             throw new NotImplementedException();
         }
 
-        public IListener StartListening<TEvent, THandler>() 
+        public IListener StartListening<TEvent, THandler>(EventConfiguration configuration) 
             where TEvent : Event 
             where THandler : IHandler<TEvent>
         {

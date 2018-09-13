@@ -4,6 +4,7 @@ using Homedish.Logging;
 using Homedish.Template.Worker.Core.Repositories;
 using Homedish.Template.Worker.Core.Services;
 using Homedish.Template.Worker.Handlers;
+using Homedish.Template.Worker.Messaging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,7 @@ namespace Homedish.Template.Worker
             services.AddTransient<ITestService, TestService>();
             services.AddTransient<ITestRepository, TestRepository>();
             services.AddTransient<ILogger, Logger>();
+            services.AddSingleton<IMessagingStartup>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

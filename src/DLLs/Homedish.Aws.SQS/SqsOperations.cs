@@ -8,6 +8,7 @@ using Amazon.Runtime.SharedInterfaces;
 using Amazon.SQS;
 using Amazon.SQS.Model;
 using Homedish.Aws.SQS.Models;
+using Homedish.Events.Contracts;
 using Homedish.Logging;
 using Newtonsoft.Json;
 
@@ -68,15 +69,15 @@ namespace Homedish.Aws.SQS
             }
         }
 
-        public async Task<string> CreateQueue(string name, int maxKeepDurationSeconds)
+        public async Task<string> CreateQueue(string name, EventConfiguration configuration)
         {
             var createQueueRequest = new CreateQueueRequest
             {
                 QueueName = name,
                 Attributes =
                 {
-                    { "ReceiveMessageWaitTimeSeconds",  "20"}, //long polling
-                    { "VisibilityTimeout",  $"{maxKeepDurationSeconds}"}
+                    { "ReceiveMessageWaitTimeSeconds",  $"{configuration.ReceiveMessageWaitTimeSeconds}"},
+                    { "MessageRetentionPeriod",  $"{configuration.MessageRetentionPeriodSeconds}"}
                 }
             };
 

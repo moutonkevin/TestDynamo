@@ -65,11 +65,11 @@ namespace Homedish.Messaging
             return topicArn;
         }
 
-        private async Task<string> GetQueueUrl(string queueName)
+        private async Task<string> GetQueueUrl(string queueName, EventConfiguration configuration)
         {
             if (!await _sqsOperations.QueueExists(queueName))
             {
-                return await _sqsOperations.CreateQueue(queueName, 42000);
+                return await _sqsOperations.CreateQueue(queueName, configuration);
             }
             return await _sqsOperations.GetQueueUrl(queueName);
         }
@@ -83,7 +83,7 @@ namespace Homedish.Messaging
             return await _snsOperations.LinkTopicToQueue(topicArn, queueUrl);
         }
 
-        public async Task<bool> SetupMessageBusWithSnsAndSqs<TEvent>() where TEvent : Event
+        public async Task<bool> SetupMessageBusWithSnsAndSqs<TEvent>(EventConfiguration configuration) where TEvent : Event
         {
             var @event = (Event) Activator.CreateInstance<TEvent>();
 
@@ -91,7 +91,7 @@ namespace Homedish.Messaging
             var queueName = EventUtils.GetQueueName(@event);
 
             var snsTopicArn = await GetTopicArn(snsTopicName);
-            var queueUrl = await GetQueueUrl(queueName);
+            var queueUrl = await GetQueueUrl(queueName, configuration);
 
             var isSuccessfullyInitialized = await LinkTopicToQueue(snsTopicArn, queueUrl);
 
