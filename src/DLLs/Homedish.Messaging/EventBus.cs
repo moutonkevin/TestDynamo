@@ -38,14 +38,19 @@ namespace Homedish.Messaging
             return await _snsOperations.Publish(@event, topicArn);
         }
 
-        public async Task<bool> PublishAsync<TEvent>(TEvent content) where TEvent : Event
+        public async Task<bool> PublishAsync<TEvent>(TEvent content, EventConfiguration configuration = null) where TEvent : Event
         {
             if (_eventBusInitializer.IsSuccessfullyInitialized<TEvent>())
             {
                 return await PublishInternalAsync(content);
             }
 
-            if (await _eventBusInitializer.SetupMessageBusWithSnsAndSqs<TEvent>())
+            if (configuration == null)
+            {
+                configuration = new DefaultEventConfiguration();
+            }
+
+            if (await _eventBusInitializer.SetupMessageBusWithSnsAndSqs<TEvent>(configuration))
             {
                 return await PublishInternalAsync(content);
             }
@@ -99,7 +104,7 @@ namespace Homedish.Messaging
             TaskCreationOptions.LongRunning, TaskScheduler.Default);
         }
 
-        public IListener StartListening<TEvent, THandler>(EventConfiguration configuration) 
+        public IListener StartListening<TEvent, THandler>(EventConfiguration configuration = null) 
             where TEvent : Event 
             where THandler : IHandler<TEvent>
         {

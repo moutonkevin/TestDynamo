@@ -16,7 +16,7 @@ namespace Homedish.Ably
             _logger = logger;
         }
 
-        public async Task<bool> PublishAsync<TEvent>(TEvent content) where TEvent : Event
+        public async Task<bool> PublishAsync<TEvent>(TEvent content, EventConfiguration configuration = null) where TEvent : Event
         {
             var channel = AblyRealtime.Channels.Get(content.ChannelName);
 

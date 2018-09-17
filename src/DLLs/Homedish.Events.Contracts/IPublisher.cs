@@ -4,6 +4,6 @@ namespace Homedish.Events.Contracts
 {
     public interface IPublisher
     {
-        Task<bool> PublishAsync<TEvent>(TEvent content) where TEvent : Event;
+        Task<bool> PublishAsync<TEvent>(TEvent content, EventConfiguration configuration = null) where TEvent : Event;
     }
 }

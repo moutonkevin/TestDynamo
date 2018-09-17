@@ -25,7 +25,7 @@ namespace Homedish.Template.Core.Services
         {
             var value = _repository.Get(id);
 
-            var result = await _publisher.PublishAsync(new TestEvent
+            await _publisher.PublishAsync(new TestEvent
             {
                 Content = "helloooo"
             });
